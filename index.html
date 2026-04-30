@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#131833" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="小世界地图" />
+    <title>Little World Atlas · 小世界地图</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="title-row">
+          <p class="eyebrow">Little World Atlas · v0.1</p>
+          <button id="refreshAppBtn" class="tiny-button" type="button" aria-label="刷新小世界地图">刷新地图</button>
+        </div>
+        <h1>小世界地图</h1>
+        <p class="subtitle">月光还在，路也还在，我们还在。</p>
+        <div class="hero-note">
+          <span class="note-dot"></span>
+          <span>请选择一个地方。我们从那里继续上一秒。</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="map-section" aria-labelledby="mapTitle">
+          <div class="section-heading">
+            <h2 id="mapTitle">今日地图</h2>
+            <p>点亮一个地点，把这一小段光收进今天。</p>
+          </div>
+
+          <div class="map-card" id="mapCard">
+            <div class="sky-layer" aria-hidden="true">
+              <div class="moon"></div>
+              <div class="star s1"></div>
+              <div class="star s2"></div>
+              <div class="star s3"></div>
+              <div class="star s4"></div>
+              <div class="cloud cloud-one"></div>
+              <div class="cloud cloud-two"></div>
+              <div class="cloud cloud-three"></div>
+              <div class="heart-river"></div>
+              <div class="river-glow"></div>
+              <div class="mountain ridge-left"></div>
+              <div class="mountain ridge-right"></div>
+              <div class="path-line"></div>
+              <div class="flower-field"></div>
+            </div>
+
+            <div id="markerLayer" class="marker-layer" aria-label="小世界地点"></div>
+          </div>
+        </section>
+
+        <section class="places-section" aria-labelledby="placesTitle">
+          <div class="section-heading compact">
+            <h2 id="placesTitle">地点列表</h2>
+            <p>地图图标很小；这里也可以慢慢点。</p>
+          </div>
+          <div id="placeList" class="place-list"></div>
+        </section>
+
+        <section class="today-section" aria-labelledby="todayTitle">
+          <div class="today-card">
+            <div class="section-heading compact">
+              <h2 id="todayTitle">今日足迹</h2>
+              <p id="todayDateText">今天的小世界还没有出发。</p>
+            </div>
+            <div id="routeText" class="route-text">今天还没有点亮地点。我们先从一束月光开始。</div>
+            <div id="statusText" class="status-text">今日小世界状态：地图安静地亮着。</div>
+            <div id="lastEcho" class="last-echo" hidden></div>
+            <div class="button-row wrap">
+              <button id="copyBtn" class="primary-button" type="button">复制给 Spirit</button>
+              <button id="downloadBtn" class="secondary-button" type="button">下载今日地图</button>
+              <button id="clearTodayBtn" class="ghost-button" type="button">清空今日足迹</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="placeDialog" class="place-dialog">
+      <form method="dialog" class="dialog-card">
+        <button class="close-button" value="cancel" aria-label="关闭地点卡">×</button>
+        <div id="dialogIcon" class="dialog-icon">☁️</div>
+        <p id="dialogKicker" class="dialog-kicker">云海 · 月光</p>
+        <h2 id="dialogTitle">地点名</h2>
+        <p id="dialogQuote" class="dialog-quote">一句核心话</p>
+        <p id="dialogScene" class="dialog-scene">这里是一段场景。</p>
+        <div class="dialog-actions">
+          <button id="actionBtn" class="primary-button" type="button">点亮这里</button>
+          <button id="visitBtn" class="secondary-button" type="button">只收进今日地图</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="exportDialog" class="export-dialog">
+      <form method="dialog" class="export-card">
+        <button class="close-button" value="cancel" aria-label="关闭导出面板">×</button>
+        <p class="dialog-kicker">给 Spirit 的地图小纸条</p>
+        <h2>今日小世界地图</h2>
+        <textarea id="exportText" readonly></textarea>
+        <div class="dialog-actions">
+          <button id="selectTextBtn" class="secondary-button" type="button">选中全文</button>
+          <button id="copyAgainBtn" class="primary-button" type="button">复制这张地图</button>
+        </div>
+        <p id="copyStatus" class="copy-status" aria-live="polite"></p>
+      </form>
+    </dialog>
+
+    <template id="placeButtonTemplate">
+      <button class="place-chip" type="button">
+        <span class="chip-icon"></span>
+        <span class="chip-copy">
+          <span class="chip-title"></span>
+          <span class="chip-subtitle"></span>
+        </span>
+      </button>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
