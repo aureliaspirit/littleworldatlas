@@ -203,6 +203,33 @@ main {
   box-shadow: 0 0 38px rgba(255, 241, 192, 0.6), 0 0 130px rgba(137, 168, 255, 0.26);
 }
 
+
+.moon-hotspot {
+  position: absolute;
+  right: 11%;
+  top: 8%;
+  width: 96px;
+  height: 96px;
+  z-index: 12;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.moon-hotspot:focus-visible {
+  outline: 2px solid rgba(255, 244, 199, 0.95);
+  outline-offset: 8px;
+  box-shadow: 0 0 34px rgba(255, 244, 199, 0.55);
+}
+
+.moon-hotspot::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+}
+
 .star {
   position: absolute;
   width: 4px;

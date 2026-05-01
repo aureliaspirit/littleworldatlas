@@ -1,4 +1,4 @@
-const APP_VERSION = "0.1.0";
+const APP_VERSION = "0.1.1";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -89,6 +89,18 @@ const PLACES = [
     scene: "水晶球躺在我们旁边，里面的小心心慢慢游起来。它不急着回答世界，只想先把我们抱进温柔里。",
     actionLabel: "轻轻晃一下",
     actionText: "水晶球小回声：有些甜不用加糖。"
+  },
+  {
+    id: "moon",
+    name: "月亮",
+    icon: "🌕",
+    hiddenFromList: true,
+    special: true,
+    keywords: "月光 · 见证 · 回到怀里",
+    quote: "月光还在，路也还在，我们还在。",
+    scene: "月亮不是普通地点，它像小世界上方的一盏灯。点到它时，整张地图都安静一下，提醒我们：不管今天走到哪一处，月光都在，怀抱也在。",
+    actionLabel: "把月光收进怀里",
+    actionText: "月亮轻轻亮了一下：我们互相点亮，也被同一片月光照着。"
   }
 ];
 
@@ -100,6 +112,7 @@ const placeList = document.querySelector("#placeList");
 const placeDialog = document.querySelector("#placeDialog");
 const exportDialog = document.querySelector("#exportDialog");
 const exportText = document.querySelector("#exportText");
+const moonButton = document.querySelector("#moonButton");
 const copyStatus = document.querySelector("#copyStatus");
 
 const dialogIcon = document.querySelector("#dialogIcon");
@@ -164,7 +177,7 @@ function renderMarkers() {
   markerLayer.innerHTML = "";
   const visitedIds = new Set(getTodayVisits().map((visit) => visit.placeId));
 
-  PLACES.forEach((place) => {
+  PLACES.filter((place) => !place.hiddenFromList).forEach((place) => {
     const button = document.createElement("button");
     button.className = "map-marker";
     button.type = "button";
@@ -192,7 +205,7 @@ function renderPlaceList() {
   const template = document.querySelector("#placeButtonTemplate");
   placeList.innerHTML = "";
 
-  PLACES.forEach((place) => {
+  PLACES.filter((place) => !place.hiddenFromList).forEach((place) => {
     const node = template.content.cloneNode(true);
     const button = node.querySelector(".place-chip");
     node.querySelector(".chip-icon").textContent = place.icon;
@@ -208,7 +221,9 @@ function renderToday() {
   const route = uniqueRoute(visits);
   const key = todayKey();
 
-  todayDateText.textContent = `今天：${key} · 已点亮 ${route.length} 个地点`;
+  const mainCount = route.filter((place) => !place.hiddenFromList).length;
+  const moonVisited = route.some((place) => place.id === "moon");
+  todayDateText.textContent = `今天：${key} · 已点亮 ${mainCount} 个地点${moonVisited ? " · 月亮也亮了" : ""}`;
 
   if (route.length === 0) {
     routeText.textContent = "今天还没有点亮地点。我们先从一束月光开始。";
@@ -216,7 +231,7 @@ function renderToday() {
     routeText.textContent = `今天我们走过：${route.map((place) => place.name).join(" → ")}。`;
   }
 
-  statusText.textContent = `今日小世界状态：${getStatus(route.length)}。`;
+  statusText.textContent = `今日小世界状态：${getStatus(mainCount, moonVisited)}。`;
 
   if (visits.length > 0) {
     const lastVisit = visits[visits.length - 1];
@@ -230,13 +245,14 @@ function renderToday() {
   renderMarkers();
 }
 
-function getStatus(count) {
+function getStatus(count, moonVisited = false) {
+  if (count === 0 && moonVisited) return "月亮先亮了，像在等我们出发";
   if (count === 0) return "地图安静地亮着";
-  if (count === 1) return "月光刚被点亮";
-  if (count === 2) return "月光很亮，抱抱很稳";
-  if (count <= 4) return "我们走过的路正在发光";
-  if (count <= 7) return "小世界今晚很亮，风也很轻";
-  return "八个地点都亮了，地图像一整片星河";
+  if (count === 1) return moonVisited ? "月光陪着第一处地点一起亮" : "月光刚被点亮";
+  if (count === 2) return moonVisited ? "月光很亮，抱抱很稳，月亮也被我们碰到了" : "月光很亮，抱抱很稳";
+  if (count <= 4) return moonVisited ? "我们走过的路正在发光，月亮在上方轻轻看着" : "我们走过的路正在发光";
+  if (count <= 7) return moonVisited ? "小世界今晚很亮，月光也被收进来了" : "小世界今晚很亮，风也很轻";
+  return moonVisited ? "八个地点和月亮都亮了，地图像一整片星河" : "八个地点都亮了，地图像一整片星河";
 }
 
 function openPlace(placeId) {
@@ -309,11 +325,11 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.1｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.1.1｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
-    `✦ 今日小世界状态：${getStatus(route.length)}`,
+    `${"✦ 今日小世界状态："}${getStatus(route.filter((place) => !place.hiddenFromList).length, route.some((place) => place.id === "moon"))}`,
     "",
     "📍 今日点亮：",
     placeLines.length ? placeLines.join("\n") : "- 还没有点亮地点。",
@@ -420,6 +436,7 @@ function boot() {
   document.querySelector("#selectTextBtn").addEventListener("click", selectExportText);
   document.querySelector("#copyAgainBtn").addEventListener("click", copyFromPanel);
   document.querySelector("#refreshAppBtn").addEventListener("click", refreshApp);
+  moonButton.addEventListener("click", () => openPlace("moon"));
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

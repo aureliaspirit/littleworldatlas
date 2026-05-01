@@ -1,4 +1,4 @@
-const CACHE_NAME = "little-world-atlas-v0-1-0";
+const CACHE_NAME = "little-world-atlas-v0-1-1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
