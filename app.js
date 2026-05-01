@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.0";
+const APP_VERSION = "0.2.1";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -273,9 +273,16 @@ function renderRoute() {
   const route = getVisibleRoute();
   if (route.length < 2) return;
 
+  const mapCard = document.querySelector("#mapCard");
+  const rect = mapCard?.getBoundingClientRect();
+  if (!rect || rect.width === 0 || rect.height === 0) return;
+
+  routeLayer.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
+  routeLayer.setAttribute("preserveAspectRatio", "none");
+
   const points = route.map((place) => ({
-    x: parseFloat(place.pos.left),
-    y: parseFloat(place.pos.top)
+    x: rect.width * parseFloat(place.pos.left) / 100,
+    y: rect.height * parseFloat(place.pos.top) / 100
   }));
 
   const d = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
@@ -289,6 +296,15 @@ function renderRoute() {
   line.setAttribute("class", "route-line route-line-main");
 
   routeLayer.append(underlay, line);
+
+  points.forEach((point, index) => {
+    const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    dot.setAttribute("cx", point.x);
+    dot.setAttribute("cy", point.y);
+    dot.setAttribute("r", index === points.length - 1 ? "4.8" : "3.8");
+    dot.setAttribute("class", index === points.length - 1 ? "route-dot route-dot-current" : "route-dot");
+    routeLayer.appendChild(dot);
+  });
 }
 
 function renderToday() {
@@ -413,7 +429,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.0｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.1｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -541,6 +557,9 @@ function boot() {
     if (!isInsideRoundTarget(event, moonButton)) return;
     openPlace("moon");
   });
+
+  window.addEventListener("resize", renderRoute);
+  window.addEventListener("orientationchange", () => window.setTimeout(renderRoute, 220));
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

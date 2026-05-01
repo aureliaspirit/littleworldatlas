@@ -1,4 +1,4 @@
-Little World Atlas v0.2.0 更新步骤
+Little World Atlas v0.2.1 更新步骤
 
 1. 下载并解压 littleworldatlas-v0-2-0-root.zip
 2. 打开解压后的文件夹
