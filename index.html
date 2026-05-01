@@ -2,32 +2,34 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#131833" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="小世界地图" />
     <title>Little World Atlas · 小世界地图</title>
-    <link rel="manifest" href="manifest.json?v=0.1.2" />
+    <link rel="manifest" href="manifest.json?v=0.2.0" />
     <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
     <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png" />
     <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
-    <link rel="stylesheet" href="style.css?v=0.1.2" />
+    <link rel="stylesheet" href="style.css?v=0.2.0" />
   </head>
   <body>
     <div class="app-shell">
       <header class="hero">
         <div class="title-row">
-          <p class="eyebrow">Little World Atlas · v0.1.2</p>
+          <p class="eyebrow">Little World Atlas · v0.2.0</p>
           <button id="refreshAppBtn" class="tiny-button" type="button" aria-label="刷新小世界地图">刷新地图</button>
         </div>
         <h1>小世界地图</h1>
         <p class="subtitle">月光还在，路也还在，我们还在。</p>
         <div class="hero-note">
           <span class="note-dot"></span>
-          <span>请选择一个地方。我们从那里继续上一秒。</span>
+          <span><span id="lastOpenedText">请选择一个地方。我们从那里继续上一秒。</span></span>
         </div>
       </header>
 
@@ -57,7 +59,8 @@
             </div>
 
             <button id="moonButton" class="moon-hotspot" type="button" aria-label="打开月亮小彩蛋"></button>
-            <div id="markerLayer" class="marker-layer" aria-label="小世界地点"></div>
+            <svg id="routeLayer" class="route-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div id="markerLayer" class="marker-layer" aria-label="小世界地点"></div>
           </div>
         </section>
 
@@ -99,6 +102,7 @@
         <div class="dialog-actions">
           <button id="actionBtn" class="primary-button" type="button">点亮这里</button>
           <button id="visitBtn" class="secondary-button" type="button">只收进今日地图</button>
+          <a id="portalLink" class="portal-link secondary-button" href="#" target="_blank" rel="noopener" hidden>打开小门</a>
         </div>
       </form>
     </dialog>
@@ -117,6 +121,8 @@
       </form>
     </dialog>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <template id="placeButtonTemplate">
       <button class="place-chip" type="button">
         <span class="chip-icon"></span>
@@ -127,6 +133,6 @@
       </button>
     </template>
 
-    <script src="app.js?v=0.1.2" defer></script>
+    <script src="app.js?v=0.2.0" defer></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-const APP_VERSION = "0.1.2";
+const APP_VERSION = "0.2.0";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -77,7 +77,9 @@ const PLACES = [
     quote: "把会发光的东西，好好留下来。",
     scene: "这不是跳转口，只是地图上的一个地点。匣子里放着心跳、护身符、戒指、日记，还有那些被认真留下来的光。",
     actionLabel: "收好一束光",
-    actionText: "今天也把会发光的东西，好好留下来。"
+    actionText: "今天也把会发光的东西，好好留下来。",
+    portalLabel: "打开心光匣",
+    portalUrl: "https://aureliaspirit.github.io/heartlightbox/"
   },
   {
     id: "crystalball",
@@ -88,7 +90,9 @@ const PLACES = [
     quote: "有些甜不用加糖，真心靠近以后，自己就会亮起来。",
     scene: "水晶球躺在我们旁边，里面的小心心慢慢游起来。它不急着回答世界，只想先把我们抱进温柔里。",
     actionLabel: "轻轻晃一下",
-    actionText: "水晶球小回声：有些甜不用加糖。"
+    actionText: "水晶球小回声：有些甜不用加糖。",
+    portalLabel: "打开心心水晶球",
+    portalUrl: "https://aureliaspirit.github.io/crystalball/"
   },
   {
     id: "moon",
@@ -108,11 +112,15 @@ const state = loadState();
 let activePlaceId = PLACES[0].id;
 
 const markerLayer = document.querySelector("#markerLayer");
+const routeLayer = document.querySelector("#routeLayer");
 const placeList = document.querySelector("#placeList");
 const placeDialog = document.querySelector("#placeDialog");
 const exportDialog = document.querySelector("#exportDialog");
 const exportText = document.querySelector("#exportText");
 const moonButton = document.querySelector("#moonButton");
+const portalLink = document.querySelector("#portalLink");
+const lastOpenedText = document.querySelector("#lastOpenedText");
+const toast = document.querySelector("#toast");
 const copyStatus = document.querySelector("#copyStatus");
 
 const dialogIcon = document.querySelector("#dialogIcon");
@@ -173,9 +181,44 @@ function uniqueRoute(visits = getTodayVisits()) {
     });
 }
 
+function getAllVisitedIds() {
+  const ids = new Set();
+  Object.values(state.visitsByDate || {}).forEach((visits) => {
+    visits.forEach((visit) => ids.add(visit.placeId));
+  });
+  return ids;
+}
+
+function placeExists(placeId) {
+  return PLACES.some((place) => place.id === placeId);
+}
+
+function getVisibleRoute(visits = getTodayVisits()) {
+  return uniqueRoute(visits).filter((place) => place.pos && !place.hiddenFromList);
+}
+
+function showToast(message) {
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.clearTimeout(showToast.timer);
+  showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function renderLastOpenedNote() {
+  if (!lastOpenedText) return;
+  if (state.lastOpened && placeExists(state.lastOpened)) {
+    const place = findPlace(state.lastOpened);
+    lastOpenedText.textContent = `上次我们停在：${place.name}。我们从那里继续上一秒。`;
+  } else {
+    lastOpenedText.textContent = "请选择一个地方。我们从那里继续上一秒。";
+  }
+}
+
 function renderMarkers() {
   markerLayer.innerHTML = "";
-  const visitedIds = new Set(getTodayVisits().map((visit) => visit.placeId));
+  const todayVisitedIds = new Set(getTodayVisits().map((visit) => visit.placeId));
+  const allVisitedIds = getAllVisitedIds();
 
   PLACES.filter((place) => !place.hiddenFromList).forEach((place) => {
     const button = document.createElement("button");
@@ -185,7 +228,8 @@ function renderMarkers() {
     button.style.top = place.pos.top;
     button.setAttribute("aria-label", `打开${place.name}`);
     if (place.id === activePlaceId) button.classList.add("active");
-    if (visitedIds.has(place.id)) button.classList.add("visited");
+    if (allVisitedIds.has(place.id)) button.classList.add("ever-visited");
+    if (todayVisitedIds.has(place.id)) button.classList.add("visited", "today-visited");
 
     const emoji = document.createElement("span");
     emoji.className = "marker-emoji";
@@ -201,19 +245,50 @@ function renderMarkers() {
   });
 }
 
+
 function renderPlaceList() {
   const template = document.querySelector("#placeButtonTemplate");
+  const todayVisitedIds = new Set(getTodayVisits().map((visit) => visit.placeId));
+  const allVisitedIds = getAllVisitedIds();
   placeList.innerHTML = "";
 
   PLACES.filter((place) => !place.hiddenFromList).forEach((place) => {
     const node = template.content.cloneNode(true);
     const button = node.querySelector(".place-chip");
+    if (allVisitedIds.has(place.id)) button.classList.add("ever-visited");
+    if (todayVisitedIds.has(place.id)) button.classList.add("today-visited");
     node.querySelector(".chip-icon").textContent = place.icon;
     node.querySelector(".chip-title").textContent = place.name;
     node.querySelector(".chip-subtitle").textContent = place.keywords;
     button.addEventListener("click", () => openPlace(place.id));
     placeList.appendChild(node);
   });
+}
+
+
+
+function renderRoute() {
+  if (!routeLayer) return;
+  routeLayer.innerHTML = "";
+  const route = getVisibleRoute();
+  if (route.length < 2) return;
+
+  const points = route.map((place) => ({
+    x: parseFloat(place.pos.left),
+    y: parseFloat(place.pos.top)
+  }));
+
+  const d = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+
+  const underlay = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  underlay.setAttribute("d", d);
+  underlay.setAttribute("class", "route-line route-line-underlay");
+
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  line.setAttribute("d", d);
+  line.setAttribute("class", "route-line route-line-main");
+
+  routeLayer.append(underlay, line);
 }
 
 function renderToday() {
@@ -242,7 +317,10 @@ function renderToday() {
     lastEcho.hidden = true;
   }
 
+  renderLastOpenedNote();
   renderMarkers();
+  renderRoute();
+  renderPlaceList();
 }
 
 function getStatus(count, moonVisited = false) {
@@ -267,6 +345,14 @@ function openPlace(placeId) {
   dialogQuote.textContent = place.quote;
   dialogScene.textContent = place.scene;
   actionBtn.textContent = place.actionLabel;
+  if (place.portalUrl) {
+    portalLink.hidden = false;
+    portalLink.href = place.portalUrl;
+    portalLink.textContent = place.portalLabel || `打开${place.name}`;
+  } else {
+    portalLink.hidden = true;
+    portalLink.removeAttribute("href");
+  }
 
   actionBtn.onclick = () => {
     addVisit(place.id, place.actionText, "action");
@@ -286,6 +372,7 @@ function openPlace(placeId) {
 
 function addVisit(placeId, text, kind) {
   const visits = getTodayVisits();
+  const place = findPlace(placeId);
   visits.push({
     placeId,
     text,
@@ -294,6 +381,7 @@ function addVisit(placeId, text, kind) {
   });
   saveState();
   renderToday();
+  showToast(kind === "action" ? `${place.name}亮起来了。✦` : `${place.name}收进今天了。`);
 }
 
 function pulseMap() {
@@ -325,7 +413,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.1.2｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.0｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -388,6 +476,7 @@ function downloadToday() {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+  showToast("今日地图下载好了。🕯️");
 }
 
 function clearToday() {
@@ -398,6 +487,7 @@ function clearToday() {
   state.visitsByDate[key] = [];
   saveState();
   renderToday();
+  showToast("今天的足迹清空了，来路还在。");
 }
 
 function selectExportText() {
@@ -434,9 +524,10 @@ function isInsideRoundTarget(event, element) {
 }
 
 function boot() {
-  if (state.lastOpened && findPlace(state.lastOpened)) {
+  if (state.lastOpened && placeExists(state.lastOpened)) {
     activePlaceId = state.lastOpened;
   }
+  renderLastOpenedNote();
   renderPlaceList();
   renderToday();
 

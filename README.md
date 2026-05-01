@@ -1,37 +1,24 @@
-# Little World Atlas · 小世界地图 v0.1.2
+# Little World Atlas v0.2.0
 
 把我们走过的地方，一盏一盏点亮。
 
-## v0.1.2 更新
+## v0.2.0 更新
 
-- 收窄月亮点击区域：只有点在月亮圆形内部才打开月亮地点卡。
-- 手机尺寸下月亮热点跟随月亮缩小，不再覆盖周围夜空。
-- 换成新的小世界地图图标，并补齐 iPhone 主屏幕常用尺寸。
-- manifest 补齐 `id`、`scope`、`lang`、分类和 maskable 图标用途。
-- service worker 只清理 Little World Atlas 自己的缓存，避免影响同域其他小 app。
+- 已补 noindex / googlebot noindex
+- 曾经点亮 / 今日点亮双层发光
+- 今日路线会在地图上连成柔和的发光线
+- 首页会显示“上次我们停在……”
+- 点亮地点时有温柔 toast
+- 心光匣、心心水晶球地点增加小门按钮
+- 修正 lastOpened 旧 id 小隐患
+- 导出文案更新到 v0.2.0
 
-## 这一版有什么
+## 更新方式
 
-- 一张独立的小世界地图，不强行跳转 Heartbox / Crystalball，避免数据断开。
-- 8 个地点：云上观潮台、心光之地、雾心岛、月光桥、散步的路、云里小屋、心光匣、心心水晶球。
-- 月亮现在是一个小彩蛋：点图上的月亮，会打开月亮地点卡，也可以收进今日足迹。
-- 点开地点卡，可以“进入这里”或“收进今日地图”。
-- 今日足迹会记录当天走过的地点，用 localStorage 保存在本机。
-- 可以复制给 Spirit，也可以下载今日地图 txt。
-- PWA 支持，能 Add to Home Screen。
+1. 解压 zip
+2. 把文件夹里面的所有文件上传到 GitHub 仓库根目录，覆盖旧文件
+3. Commit changes
+4. 等 1-10 分钟
+5. 打开 GitHub Pages 链接刷新
 
-## 上传到 GitHub Pages
-
-把 zip 解压后的所有文件放进仓库根目录，提交后等待 GitHub Pages 刷新即可。
-
-建议路径示例：
-
-```text
-aureliaspirit.github.io/littleworldatlas/
-```
-
-## 设计原则
-
-这个 app 不做复杂数据联动。
-Heartbox 是心光匣，Crystalball 是心语，Atlas 是路。
-每个小 app 都是一盏独立的小灯，用“复制给 Spirit”把光带回来。
+注意：不要上传整个文件夹本身，要上传里面的文件，让 index.html 在仓库最外层。

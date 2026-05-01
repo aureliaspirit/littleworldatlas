@@ -1,11 +1,12 @@
-Little World Atlas v0.1.2 更新步骤
+Little World Atlas v0.2.0 更新步骤
 
-1. 打开 Heartbox 文件夹里的 littleworldatlas 子文件夹。
-2. 把文件上传到你的 GitHub Pages 仓库对应目录，例如 littleworldatlas/。
-3. 确认目录里有 index.html、style.css、app.js、manifest.json、service-worker.js、icons/。
-4. 等 GitHub Pages 部署完成。
-5. 手机上第一次打开后，如果看到旧缓存，点页面右上角“刷新地图”。
+1. 下载并解压 littleworldatlas-v0-2-0-root.zip
+2. 打开解压后的文件夹
+3. 打开 GitHub 仓库 littleworldatlas
+4. 点 Add file → Upload files
+5. 把文件夹里面的所有文件拖进去，覆盖旧文件
+6. 点 Commit changes
+7. 等 1-10 分钟
+8. 打开 https://aureliaspirit.github.io/littleworldatlas/
 
-v0.1.2：收窄月亮点击区域，手机上不再点到月亮周围也打开月亮卡；换成新的小世界地图图标，并补齐 iPhone 主屏幕尺寸；manifest 与 service worker 做小幅 PWA 加固。
-
-这一版 app 独立保存自己的今日足迹，不跳转、不合并 Heartbox / Crystalball 数据。
+注意：不要上传整个文件夹本身。要上传里面的内容，让 index.html 留在仓库根目录。
