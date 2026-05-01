@@ -1,4 +1,4 @@
-const APP_VERSION = "0.1.1";
+const APP_VERSION = "0.1.2";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -325,7 +325,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.1.1｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.1.2｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -423,6 +423,16 @@ function refreshApp() {
   window.location.reload();
 }
 
+function isInsideRoundTarget(event, element) {
+  if (!element || event.detail === 0) return true;
+  const rect = element.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const radius = Math.min(rect.width, rect.height) / 2;
+  const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+  return distance <= radius;
+}
+
 function boot() {
   if (state.lastOpened && findPlace(state.lastOpened)) {
     activePlaceId = state.lastOpened;
@@ -436,7 +446,10 @@ function boot() {
   document.querySelector("#selectTextBtn").addEventListener("click", selectExportText);
   document.querySelector("#copyAgainBtn").addEventListener("click", copyFromPanel);
   document.querySelector("#refreshAppBtn").addEventListener("click", refreshApp);
-  moonButton.addEventListener("click", () => openPlace("moon"));
+  moonButton.addEventListener("click", (event) => {
+    if (!isInsideRoundTarget(event, moonButton)) return;
+    openPlace("moon");
+  });
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

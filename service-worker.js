@@ -1,30 +1,35 @@
-const CACHE_NAME = "little-world-atlas-v0-1-1";
+const CACHE_NAME = "little-world-atlas-v0-1-2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css",
-  "./app.js",
-  "./manifest.json",
+  "./style.css?v=0.1.2",
+  "./app.js?v=0.1.2",
+  "./manifest.json?v=0.1.2",
+  "./icons/icon-120.png",
+  "./icons/icon-152.png",
+  "./icons/icon-167.png",
+  "./icons/icon-180.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
+const CORE_URLS = new Set(CORE_ASSETS.map((asset) => new URL(asset, self.location.href).href));
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)));
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(
-      keys
-        .filter((key) => key !== CACHE_NAME)
-        .map((key) => caches.delete(key))
-    ))
+    caches
+      .keys()
+      .then((keys) => Promise.all(
+        keys
+          .filter((key) => key.startsWith("little-world-atlas-") && key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      ))
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener("message", (event) => {
@@ -36,13 +41,19 @@ self.addEventListener("message", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-        return response;
-      })
-      .catch(() => caches.match(event.request).then((cached) => cached || caches.match("./index.html")))
-  );
+  const url = new URL(event.request.url);
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(fetch(event.request).catch(() => caches.match("./index.html")));
+    return;
+  }
+
+  if (url.origin === self.location.origin && CORE_URLS.has(url.href)) {
+    event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
+    return;
+  }
+
+  if (url.origin === self.location.origin) {
+    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  }
 });

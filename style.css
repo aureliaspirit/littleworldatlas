@@ -213,6 +213,7 @@ main {
   z-index: 12;
   border: 0;
   border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
   background: transparent;
   cursor: pointer;
 }
@@ -221,13 +222,6 @@ main {
   outline: 2px solid rgba(255, 244, 199, 0.95);
   outline-offset: 8px;
   box-shadow: 0 0 34px rgba(255, 244, 199, 0.55);
-}
-
-.moon-hotspot::after {
-  content: "";
-  position: absolute;
-  inset: -10px;
-  border-radius: 50%;
 }
 
 .star {
@@ -697,6 +691,11 @@ dialog::backdrop {
   }
 
   .moon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .moon-hotspot {
     width: 72px;
     height: 72px;
   }

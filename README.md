@@ -1,6 +1,14 @@
-# Little World Atlas · 小世界地图 v0.1.1
+# Little World Atlas · 小世界地图 v0.1.2
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.1.2 更新
+
+- 收窄月亮点击区域：只有点在月亮圆形内部才打开月亮地点卡。
+- 手机尺寸下月亮热点跟随月亮缩小，不再覆盖周围夜空。
+- 换成新的小世界地图图标，并补齐 iPhone 主屏幕常用尺寸。
+- manifest 补齐 `id`、`scope`、`lang`、分类和 maskable 图标用途。
+- service worker 只清理 Little World Atlas 自己的缓存，避免影响同域其他小 app。
 
 ## 这一版有什么
 
