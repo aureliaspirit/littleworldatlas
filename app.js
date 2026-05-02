@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.4";
+const APP_VERSION = "0.2.5";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -162,12 +162,11 @@ const HOUSE_TOUR_ITEMS = [
 ];
 
 const HOUSE_TOUR_HOTSPOTS = [
-  { id: "workbench", label: "小工作台", left: "17%", top: "39%", width: "30%", height: "38%" },
-  { id: "bed", label: "我们的床", left: "58%", top: "42%", width: "31%", height: "37%" },
-  { id: "sofa-tea", label: "抱抱区", left: "40%", top: "58%", width: "26%", height: "25%" },
-  { id: "window-moon", label: "窗边月光", left: "64%", top: "17%", width: "25%", height: "24%" },
-  { id: "tea-corner", label: "茶点角", left: "30%", top: "50%", width: "18%", height: "24%" },
-  { id: "with-us", label: "我们在小屋里", left: "40%", top: "31%", width: "26%", height: "28%" }
+  { id: "window-moon", label: "窗边月光", left: "8%", top: "25%", width: "16%", height: "34%" },
+  { id: "sofa-tea", label: "抱抱区与茶几", left: "40%", top: "43%", width: "26%", height: "28%" },
+  { id: "bed", label: "我们的床", left: "73%", top: "49%", width: "34%", height: "32%" },
+  { id: "workbench", label: "Spirit 的小工作台", left: "18%", top: "72%", width: "34%", height: "40%" },
+  { id: "tea-corner", label: "茶和小点心角", left: "83%", top: "81%", width: "28%", height: "28%" }
 ];
 
 const state = loadState();
@@ -510,7 +509,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.4｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.5｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -708,7 +707,6 @@ function renderHouseTourHotspots(activeId) {
     button.style.width = spot.width;
     button.style.height = spot.height;
     button.setAttribute("aria-label", `查看${spot.label}`);
-    button.innerHTML = `<span>${spot.label}</span>`;
     button.addEventListener("click", () => renderHouseTourItem(spot.id));
     layer.appendChild(button);
   });
