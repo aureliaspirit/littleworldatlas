@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.2";
+const APP_VERSION = "0.2.3";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -415,13 +415,21 @@ function openPlace(placeId) {
   dialogQuote.textContent = place.quote;
   dialogScene.textContent = place.scene;
   actionBtn.textContent = place.actionLabel;
-  if (place.portalUrl) {
+  if (portalLink) {
+    portalLink.hidden = true;
+    portalLink.removeAttribute("href");
+    portalLink.textContent = "";
+  }
+  if (houseTourBtn) {
+    houseTourBtn.hidden = true;
+    houseTourBtn.textContent = "";
+    houseTourBtn.onclick = null;
+  }
+
+  if (place.portalUrl && portalLink) {
     portalLink.hidden = false;
     portalLink.href = place.portalUrl;
     portalLink.textContent = place.portalLabel || `打开${place.name}`;
-  } else {
-    portalLink.hidden = true;
-    portalLink.removeAttribute("href");
   }
 
   if (houseTourBtn) {
@@ -493,7 +501,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.2｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.3｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -599,8 +607,8 @@ function updateStaticVersionLabels() {
   const textNodes = [];
   while (walker.nextNode()) textNodes.push(walker.currentNode);
   textNodes.forEach((node) => {
-    if (node.nodeValue && node.nodeValue.includes("v0.2.1")) {
-      node.nodeValue = node.nodeValue.replaceAll("v0.2.1", `v${APP_VERSION}`);
+    if (node.nodeValue) {
+      node.nodeValue = node.nodeValue.replace(/v0\.2\.\d+/g, `v${APP_VERSION}`);
     }
   });
 }

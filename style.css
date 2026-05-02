@@ -729,6 +729,11 @@ dialog::backdrop {
   text-decoration: none;
 }
 
+.portal-link[hidden],
+#houseTourBtn[hidden] {
+  display: none !important;
+}
+
 .toast {
   position: fixed;
   z-index: 80;
@@ -948,10 +953,6 @@ dialog::backdrop {
   padding: 0 2px 2px;
   font-weight: 700;
   font-size: 0.92rem;
-}
-
-#houseTourBtn[hidden] {
-  display: none;
 }
 
 @media (max-width: 840px) {
