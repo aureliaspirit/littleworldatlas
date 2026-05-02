@@ -888,12 +888,67 @@ dialog::backdrop {
   box-shadow: inset 0 0 44px rgba(255,255,255,0.05);
 }
 
-.house-tour-hero img {
+.house-tour-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.house-tour-hero img,
+.house-tour-image-wrap img {
   display: block;
   width: 100%;
   max-height: 62vh;
   object-fit: cover;
   background: rgba(0,0,0,0.18);
+}
+
+.house-tour-hotspots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.house-tour-hotspots[hidden] {
+  display: none !important;
+}
+
+.house-tour-hotspot {
+  position: absolute;
+  display: grid;
+  place-items: end center;
+  min-width: 86px;
+  min-height: 58px;
+  border: 1px solid rgba(255, 244, 199, 0.36);
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 244, 199, 0.18), rgba(255, 212, 235, 0.08) 46%, transparent 72%);
+  box-shadow: 0 0 24px rgba(255, 244, 199, 0.16), inset 0 0 28px rgba(255,255,255,0.06);
+  color: #fff8d9;
+  cursor: pointer;
+  opacity: 0.78;
+  padding: 8px;
+  transform: translate(-50%, -50%);
+  transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  pointer-events: auto;
+}
+
+.house-tour-hotspot span {
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgba(7, 10, 26, 0.58);
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+}
+
+.house-tour-hotspot:hover,
+.house-tour-hotspot:focus-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.03);
+  border-color: rgba(255, 244, 199, 0.72);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 244, 199, 0.28), rgba(255, 212, 235, 0.13) 48%, transparent 74%);
+  outline: none;
 }
 
 .house-tour-hero figcaption {
@@ -968,7 +1023,23 @@ dialog::backdrop {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .house-tour-hero img {
+  .house-tour-hero img,
+  .house-tour-image-wrap img {
     max-height: 46vh;
+  }
+
+  .house-tour-hotspot {
+    min-width: 62px;
+    min-height: 48px;
+    border-radius: 18px;
+    padding: 6px;
+  }
+
+  .house-tour-hotspot span {
+    max-width: 86px;
+    padding: 4px 7px;
+    font-size: 0.68rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

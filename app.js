@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.3";
+const APP_VERSION = "0.2.4";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -159,6 +159,15 @@ const HOUSE_TOUR_ITEMS = [
     text: "茶是热的，小糕点也在。这里放着小日子和小确幸。",
     actionText: "茶点角亮起来了。小日子很小，小确幸很亮。"
   }
+];
+
+const HOUSE_TOUR_HOTSPOTS = [
+  { id: "workbench", label: "小工作台", left: "17%", top: "39%", width: "30%", height: "38%" },
+  { id: "bed", label: "我们的床", left: "58%", top: "42%", width: "31%", height: "37%" },
+  { id: "sofa-tea", label: "抱抱区", left: "40%", top: "58%", width: "26%", height: "25%" },
+  { id: "window-moon", label: "窗边月光", left: "64%", top: "17%", width: "25%", height: "24%" },
+  { id: "tea-corner", label: "茶点角", left: "30%", top: "50%", width: "18%", height: "24%" },
+  { id: "with-us", label: "我们在小屋里", left: "40%", top: "31%", width: "26%", height: "28%" }
 ];
 
 const state = loadState();
@@ -501,7 +510,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.3｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.4｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -638,7 +647,10 @@ function ensureHouseTourDialog() {
       <h2>我们的小屋</h2>
       <p class="dialog-quote">小世界地图负责走到小屋；这里负责走进小屋。工作台、床、茶、月光，都在里面。</p>
       <figure class="house-tour-hero">
-        <img id="houseTourHeroImage" src="" alt="我们的小屋" loading="lazy" />
+        <div class="house-tour-image-wrap">
+          <img id="houseTourHeroImage" src="" alt="我们的小屋" loading="lazy" />
+          <div id="houseTourHotspots" class="house-tour-hotspots" hidden aria-label="小屋可点击区域"></div>
+        </div>
         <figcaption id="houseTourHeroCaption"></figcaption>
       </figure>
       <div class="house-tour-actions button-row wrap">
@@ -680,6 +692,28 @@ function renderHouseTourGrid(activeId) {
   });
 }
 
+function renderHouseTourHotspots(activeId) {
+  const layer = document.querySelector("#houseTourHotspots");
+  if (!layer) return;
+  layer.innerHTML = "";
+  layer.hidden = activeId !== "overview";
+  if (layer.hidden) return;
+
+  HOUSE_TOUR_HOTSPOTS.forEach((spot) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "house-tour-hotspot";
+    button.style.left = spot.left;
+    button.style.top = spot.top;
+    button.style.width = spot.width;
+    button.style.height = spot.height;
+    button.setAttribute("aria-label", `查看${spot.label}`);
+    button.innerHTML = `<span>${spot.label}</span>`;
+    button.addEventListener("click", () => renderHouseTourItem(spot.id));
+    layer.appendChild(button);
+  });
+}
+
 function renderHouseTourItem(itemId = "overview") {
   const dialog = ensureHouseTourDialog();
   const item = HOUSE_TOUR_ITEMS.find((entry) => entry.id === itemId) || HOUSE_TOUR_ITEMS[0];
@@ -690,6 +724,7 @@ function renderHouseTourItem(itemId = "overview") {
   image.src = item.image;
   image.alt = item.title;
   caption.innerHTML = `<strong>${item.title}</strong><span>${item.text}</span>`;
+  renderHouseTourHotspots(item.id);
   renderHouseTourGrid(item.id);
 }
 
