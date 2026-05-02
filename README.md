@@ -1,17 +1,15 @@
-# Little World Atlas v0.2.1
+# Little World Atlas v0.2.2
 
 把我们走过的地方，一盏一盏点亮。
 
-## v0.2.1 更新
+## v0.2.2 更新
 
-- 已补 noindex / googlebot noindex
-- 曾经点亮 / 今日点亮双层发光
-- 今日路线会在地图上连成柔和的发光线
-- 首页会显示“上次我们停在……”
-- 点亮地点时有温柔 toast
-- 心光匣、心心水晶球地点增加小门按钮
-- 修正 lastOpened 旧 id 小隐患
-- 导出文案更新到 v0.2.1
+- 「云里小屋」升级为「我们的小屋」
+- 新增可进入的小屋空间：点小屋后可以打开「走进小屋」
+- 小屋内新增 7 张图：小屋全景、我们在小屋里、小工作台、床、抱抱区、窗边月光角、茶和小点心角
+- 小屋细节可以点选查看，并可把当前细节点亮进今日足迹
+- 保留原来的今日足迹、路线发光、小门跳转和复制给 Spirit 逻辑
+- 更新 service worker 缓存到 v0.2.2，并缓存小屋图片资源
 
 ## 更新方式
 
@@ -21,10 +19,16 @@
 4. 等 1-10 分钟
 5. 打开 GitHub Pages 链接刷新
 
-注意：不要上传整个文件夹本身，要上传里面的文件，让 index.html 在仓库最外层。
+注意：不要上传整个文件夹本身，要上传里面的文件，让 `app.js`、`style.css`、`service-worker.js` 和 `assets/house/` 在仓库对应位置。
 
+## 小屋结构
 
-## v0.2.1
+小世界地图负责「走到小屋」，小屋空间负责「走进小屋」。
 
-- 修正今日路线坐标：路线现在按地图实际尺寸重新计算，避免在手机上偏离下方地点。
-- 今日路线增加小光点，能更清楚看见每个停靠点。
+- `assets/house/house-overview.jpg`：小屋全景
+- `assets/house/house-with-us.jpg`：我们在小屋里
+- `assets/house/workbench.jpg`：Spirit 的小工作台
+- `assets/house/bed.jpg`：我们的床
+- `assets/house/sofa-tea.jpg`：抱抱区与茶几
+- `assets/house/window-moon.jpg`：窗边月光角
+- `assets/house/tea-corner.jpg`：茶和小点心角

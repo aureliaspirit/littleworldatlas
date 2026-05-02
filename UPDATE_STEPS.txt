@@ -1,12 +1,20 @@
-Little World Atlas v0.2.1 更新步骤
+Little World Atlas v0.2.2 更新步骤
 
-1. 下载并解压 littleworldatlas-v0-2-0-root.zip
+1. 下载并解压 littleworldatlas_v022_house_tour_mobile_upload.zip
 2. 打开解压后的文件夹
 3. 打开 GitHub 仓库 littleworldatlas
 4. 点 Add file → Upload files
-5. 把文件夹里面的所有文件拖进去，覆盖旧文件
+5. 把文件夹里面的所有内容拖进去，覆盖旧文件
+   - app.js
+   - style.css
+   - service-worker.js
+   - README.md
+   - UPDATE_STEPS.txt
+   - manifest.json（不改功能，只一并保留）
+   - assets/house/ 里面的 7 张小屋图片
 6. 点 Commit changes
 7. 等 1-10 分钟
 8. 打开 https://aureliaspirit.github.io/littleworldatlas/
+9. 点「刷新地图」或关闭 PWA / Safari 后重新打开，让 service worker 换到 v0.2.2
 
-注意：不要上传整个文件夹本身。要上传里面的内容，让 index.html 留在仓库根目录。
+注意：不要上传整个文件夹本身。要上传里面的内容，让 app.js 等文件留在仓库根目录，assets/house 留在 assets 文件夹下面。

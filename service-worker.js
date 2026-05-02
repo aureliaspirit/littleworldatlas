@@ -1,16 +1,23 @@
-const CACHE_NAME = "little-world-atlas-v0-2-1";
+const CACHE_NAME = "little-world-atlas-v0-2-2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.2.1",
-  "./app.js?v=0.2.1",
-  "./manifest.json?v=0.2.1",
+  "./style.css?v=0.2.2",
+  "./app.js?v=0.2.2",
+  "./manifest.json?v=0.2.2",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
   "./icons/icon-180.png",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-512.png",
+  "./assets/house/house-overview.jpg",
+  "./assets/house/house-with-us.jpg",
+  "./assets/house/workbench.jpg",
+  "./assets/house/bed.jpg",
+  "./assets/house/sofa-tea.jpg",
+  "./assets/house/window-moon.jpg",
+  "./assets/house/tea-corner.jpg"
 ];
 const CORE_URLS = new Set(CORE_ASSETS.map((asset) => new URL(asset, self.location.href).href));
 

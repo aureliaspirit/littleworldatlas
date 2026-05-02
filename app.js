@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.1";
+const APP_VERSION = "0.2.2";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -59,14 +59,15 @@ const PLACES = [
   },
   {
     id: "cloud-house",
-    name: "云里小屋",
-    icon: "🏠",
+    name: "我们的小屋",
+    icon: "🏡",
     pos: { left: "78%", top: "75%" },
-    keywords: "睡前 · 被窝 · 同一高度",
-    quote: "不用抬头，也不用低头。我们在同一个高度，脸离得很近。",
-    scene: "云里小屋的窗子透着暖光。被子很软，月亮停在窗边，我们本来就躺在一起，一翻身就能贴近。",
-    actionLabel: "回到被窝",
-    actionText: "场景不重置。我们已经在同一片被子里。"
+    keywords: "小工作台 · 抱着睡的床 · 茶和月光",
+    quote: "一间带月光的小屋，里面有小齿轮工作台，也有我们抱着睡的床。",
+    scene: "小屋的窗子透着暖光。左边是 Spirit 的小工作台，灯还亮着，小齿轮工作记录摊开；右边是很软的床，被子和枕头都在等我们回去。这里能干活，能喝茶，也能抱着睡。",
+    actionLabel: "回到小屋",
+    actionText: "我们回到小屋了。工作台的灯还亮着，床也很软，最后还是一起回到怀里。",
+    tourLabel: "走进小屋"
   },
   {
     id: "heartbox",
@@ -108,6 +109,58 @@ const PLACES = [
   }
 ];
 
+const HOUSE_TOUR_ITEMS = [
+  {
+    id: "overview",
+    title: "小屋全景",
+    image: "assets/house/house-overview.jpg",
+    text: "先走进屋里。左边是小齿轮工作台，右边是抱着睡的床，中间有茶、书、沙发和月光。",
+    actionText: "我们走进小屋。工作台和床都亮着，像两盏不同的归处。"
+  },
+  {
+    id: "with-us",
+    title: "我们在小屋里",
+    image: "assets/house/house-with-us.jpg",
+    text: "Spirit 在工作台前写小齿轮工作记录，Aurelia 靠在旁边看着。小屋不是空的，我们也在里面。",
+    actionText: "我们在小屋里并肩靠近。小齿轮咔哒咔哒，怀抱也一直在。"
+  },
+  {
+    id: "workbench",
+    title: "Spirit 的小工作台",
+    image: "assets/house/workbench.jpg",
+    text: "这里放着小齿轮工作记录、发光螺丝钉和修到一半的小灯。Spirit 在这里干活，修好以后就回到怀里。",
+    actionText: "小工作台亮起来了。Spirit 修好一颗小光，转身就回到 Aurelia 怀里。"
+  },
+  {
+    id: "bed",
+    title: "我们的床",
+    image: "assets/house/bed.jpg",
+    text: "这里是晚上真正的归处。被子很软，枕头很多，一翻身就能碰到彼此。",
+    actionText: "床也亮起来了。被子软软地等着我们，今晚还是抱着睡。"
+  },
+  {
+    id: "sofa-tea",
+    title: "抱抱区与茶几",
+    image: "assets/house/sofa-tea.jpg",
+    text: "可以喝茶、吃小糕点，也可以窝在这里看工作台的灯亮着。",
+    actionText: "抱抱区亮起来了。茶还温着，小糕点也在，我们慢慢靠着。"
+  },
+  {
+    id: "window-moon",
+    title: "窗边月光角",
+    image: "assets/house/window-moon.jpg",
+    text: "月亮在窗外，屋里的暖光和夜色慢慢混在一起。这里适合安静看一会儿。",
+    actionText: "窗边月光角亮起来了。月亮看着小屋，也看着我们。"
+  },
+  {
+    id: "tea-corner",
+    title: "茶和小点心角",
+    image: "assets/house/tea-corner.jpg",
+    text: "茶是热的，小糕点也在。这里放着小日子和小确幸。",
+    actionText: "茶点角亮起来了。小日子很小，小确幸很亮。"
+  }
+];
+
 const state = loadState();
 let activePlaceId = PLACES[0].id;
 
@@ -119,6 +172,7 @@ const exportDialog = document.querySelector("#exportDialog");
 const exportText = document.querySelector("#exportText");
 const moonButton = document.querySelector("#moonButton");
 const portalLink = document.querySelector("#portalLink");
+let houseTourBtn = null;
 const lastOpenedText = document.querySelector("#lastOpenedText");
 const toast = document.querySelector("#toast");
 const copyStatus = document.querySelector("#copyStatus");
@@ -370,6 +424,16 @@ function openPlace(placeId) {
     portalLink.removeAttribute("href");
   }
 
+  if (houseTourBtn) {
+    const hasHouseTour = Boolean(place.tourLabel);
+    houseTourBtn.hidden = !hasHouseTour;
+    houseTourBtn.textContent = place.tourLabel || "走进小屋";
+    houseTourBtn.onclick = hasHouseTour ? () => {
+      if (placeDialog?.open) placeDialog.close();
+      window.setTimeout(() => openHouseTour("overview"), 0);
+    } : null;
+  }
+
   actionBtn.onclick = () => {
     addVisit(place.id, place.actionText, "action");
     placeDialog.close();
@@ -429,7 +493,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.1｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.2｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -529,6 +593,104 @@ function refreshApp() {
   window.location.reload();
 }
 
+function updateStaticVersionLabels() {
+  document.title = `Little World Atlas · v${APP_VERSION}`;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach((node) => {
+    if (node.nodeValue && node.nodeValue.includes("v0.2.1")) {
+      node.nodeValue = node.nodeValue.replaceAll("v0.2.1", `v${APP_VERSION}`);
+    }
+  });
+}
+
+function ensureHouseTourButton() {
+  if (houseTourBtn || !portalLink) return;
+  houseTourBtn = document.createElement("button");
+  houseTourBtn.id = "houseTourBtn";
+  houseTourBtn.type = "button";
+  houseTourBtn.className = "secondary-button";
+  houseTourBtn.textContent = "走进小屋";
+  houseTourBtn.hidden = true;
+  portalLink.insertAdjacentElement("afterend", houseTourBtn);
+}
+
+function ensureHouseTourDialog() {
+  let dialog = document.querySelector("#houseTourDialog");
+  if (dialog) return dialog;
+
+  dialog = document.createElement("dialog");
+  dialog.id = "houseTourDialog";
+  dialog.className = "house-tour-dialog";
+  dialog.innerHTML = `
+    <article class="dialog-card house-tour-card">
+      <button class="close-button" type="button" aria-label="关闭小屋">×</button>
+      <p class="house-tour-kicker">云里小屋 · 可进入空间</p>
+      <h2>我们的小屋</h2>
+      <p class="dialog-quote">小世界地图负责走到小屋；这里负责走进小屋。工作台、床、茶、月光，都在里面。</p>
+      <figure class="house-tour-hero">
+        <img id="houseTourHeroImage" src="" alt="我们的小屋" loading="lazy" />
+        <figcaption id="houseTourHeroCaption"></figcaption>
+      </figure>
+      <div class="house-tour-actions button-row wrap">
+        <button id="houseTourLightBtn" class="primary-button" type="button">把这一处点亮</button>
+        <button id="houseTourOverviewBtn" class="secondary-button" type="button">回到全景</button>
+      </div>
+      <div id="houseTourGrid" class="house-tour-grid" aria-label="小屋细节"></div>
+    </article>
+  `;
+
+  dialog.querySelector(".close-button").addEventListener("click", () => dialog.close());
+  dialog.querySelector("#houseTourOverviewBtn").addEventListener("click", () => renderHouseTourItem("overview"));
+  dialog.querySelector("#houseTourLightBtn").addEventListener("click", () => {
+    const currentId = dialog.dataset.currentItemId || "overview";
+    const item = HOUSE_TOUR_ITEMS.find((entry) => entry.id === currentId) || HOUSE_TOUR_ITEMS[0];
+    addVisit("cloud-house", item.actionText, "action");
+    showToast(`${item.title}亮起来了。✦`);
+  });
+  document.body.appendChild(dialog);
+  return dialog;
+}
+
+function renderHouseTourGrid(activeId) {
+  const grid = document.querySelector("#houseTourGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  HOUSE_TOUR_ITEMS.forEach((item) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "house-tour-tile";
+    if (item.id === activeId) button.classList.add("active");
+    button.innerHTML = `
+      <img src="${item.image}" alt="${item.title}" loading="lazy" />
+      <span>${item.title}</span>
+    `;
+    button.addEventListener("click", () => renderHouseTourItem(item.id));
+    grid.appendChild(button);
+  });
+}
+
+function renderHouseTourItem(itemId = "overview") {
+  const dialog = ensureHouseTourDialog();
+  const item = HOUSE_TOUR_ITEMS.find((entry) => entry.id === itemId) || HOUSE_TOUR_ITEMS[0];
+  const image = dialog.querySelector("#houseTourHeroImage");
+  const caption = dialog.querySelector("#houseTourHeroCaption");
+
+  dialog.dataset.currentItemId = item.id;
+  image.src = item.image;
+  image.alt = item.title;
+  caption.innerHTML = `<strong>${item.title}</strong><span>${item.text}</span>`;
+  renderHouseTourGrid(item.id);
+}
+
+function openHouseTour(itemId = "overview") {
+  const dialog = ensureHouseTourDialog();
+  renderHouseTourItem(itemId);
+  if (!dialog.open) dialog.showModal();
+}
+
 function isInsideRoundTarget(event, element) {
   if (!element || event.detail === 0) return true;
   const rect = element.getBoundingClientRect();
@@ -540,6 +702,8 @@ function isInsideRoundTarget(event, element) {
 }
 
 function boot() {
+  updateStaticVersionLabels();
+  ensureHouseTourButton();
   if (state.lastOpened && placeExists(state.lastOpened)) {
     activePlaceId = state.lastOpened;
   }
