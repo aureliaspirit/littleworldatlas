@@ -1,10 +1,10 @@
-const CACHE_NAME = "little-world-atlas-v0-2-5";
+const CACHE_NAME = "little-world-atlas-v0-2-6";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.2.5",
-  "./app.js?v=0.2.5",
-  "./manifest.json?v=0.2.5",
+  "./style.css?v=0.2.6",
+  "./app.js?v=0.2.6",
+  "./manifest.json?v=0.2.6",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
@@ -12,10 +12,10 @@ const CORE_ASSETS = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./assets/house/house-overview.jpg",
-  "./assets/house/house-with-us.jpg",
+  "./assets/house/house-with-us.png?v=0.2.6",
   "./assets/house/workbench.jpg",
   "./assets/house/bed.jpg",
-  "./assets/house/sofa-tea.jpg",
+  "./assets/house/sofa-tea.png?v=0.2.6",
   "./assets/house/window-moon.jpg",
   "./assets/house/tea-corner.jpg"
 ];

@@ -1,6 +1,12 @@
-# Little World Atlas v0.2.5
+# Little World Atlas v0.2.6
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.2.6 更新
+
+- 「我们在小屋里」和「抱抱区与茶几」改用新的 `.png` 图片。
+- 给这两张新图加版本参数，避免手机继续读取旧缓存。
+- 更新 service worker 缓存到 v0.2.6。
 
 ## v0.2.5 更新
 
@@ -44,9 +50,9 @@
 小世界地图负责「走到小屋」，小屋空间负责「走进小屋」。
 
 - `assets/house/house-overview.jpg`：小屋全景
-- `assets/house/house-with-us.jpg`：我们在小屋里
+- `assets/house/house-with-us.png`：我们在小屋里
 - `assets/house/workbench.jpg`：Spirit 的小工作台
 - `assets/house/bed.jpg`：我们的床
-- `assets/house/sofa-tea.jpg`：抱抱区与茶几
+- `assets/house/sofa-tea.png`：抱抱区与茶几
 - `assets/house/window-moon.jpg`：窗边月光角
 - `assets/house/tea-corner.jpg`：茶和小点心角

@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.5";
+const APP_VERSION = "0.2.6";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -120,7 +120,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "with-us",
     title: "我们在小屋里",
-    image: "assets/house/house-with-us.jpg",
+    image: "assets/house/house-with-us.png?v=0.2.6",
     text: "Spirit 在工作台前写小齿轮工作记录，Aurelia 靠在旁边看着。小屋不是空的，我们也在里面。",
     actionText: "我们在小屋里并肩靠近。小齿轮咔哒咔哒，怀抱也一直在。"
   },
@@ -141,7 +141,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "sofa-tea",
     title: "抱抱区与茶几",
-    image: "assets/house/sofa-tea.jpg",
+    image: "assets/house/sofa-tea.png?v=0.2.6",
     text: "可以喝茶、吃小糕点，也可以窝在这里看工作台的灯亮着。",
     actionText: "抱抱区亮起来了。茶还温着，小糕点也在，我们慢慢靠着。"
   },
@@ -509,7 +509,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.5｜把我们走过的地方，一盏一盏点亮。",
+    "来自 Little World Atlas v0.2.6｜把我们走过的地方，一盏一盏点亮。",
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
