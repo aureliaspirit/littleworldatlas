@@ -1,36 +1,61 @@
-const CACHE_NAME = "little-world-atlas-v0-2-10";
+const CACHE_NAME = "little-world-atlas-v0-3-0";
+
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.2.9",
-  "./app.js?v=0.2.9",
-  "./atlas-v0-2-9.js?v=0.2.9",
-  "./manifest.json?v=0.2.10",
+  "./style.css?v=0.3.0",
+  "./app.js?v=0.3.0",
+  "./manifest.json?v=0.3.0",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
   "./icons/icon-180.png",
   "./icons/icon-192.png",
-  "./icons/icon-512.png",
-  "./assets/house/house-overview.jpg",
-  "./assets/house/house-with-us.png?v=0.2.8",
-  "./assets/house/workbench.jpg",
-  "./assets/house/bed.jpg",
-  "./assets/house/sofa-tea.png?v=0.2.8",
-  "./assets/house/window-moon.jpg",
-  "./assets/house/tea-corner.jpg",
-  "./assets/heartlight-land/heartlight-overview.png?v=0.2.8",
-  "./assets/heartlight-land/glowing-bridge.png?v=0.2.8",
-  "./assets/heartlight-land/lighthouse-water.png?v=0.2.8",
-  "./assets/heartlight-land/twin-holy-tree.png?v=0.2.8",
-  "./assets/heartlight-land/garden-pavilion.png?v=0.2.8",
-  "./assets/heartlight-land/pavilion-cottage.png?v=0.2.8",
-  "./assets/heartlight-land/riverbank-flowers.png?v=0.2.8"
+  "./icons/icon-512.png"
 ];
+
+const SCENE_ASSETS = [
+  "./assets/house/house-overview.jpg",
+  "./assets/heartlight-land/heartlight-overview.jpg?v=0.3.0"
+];
+
+const RUNTIME_IMAGE_PATHS = [
+  "/assets/house/",
+  "/assets/heartlight-land/"
+];
+
 const CORE_URLS = new Set(CORE_ASSETS.map((asset) => new URL(asset, self.location.href).href));
+const SCENE_URLS = new Set(SCENE_ASSETS.map((asset) => new URL(asset, self.location.href).href));
+
+function isAtlasImage(url) {
+  return url.origin === self.location.origin
+    && RUNTIME_IMAGE_PATHS.some((path) => url.pathname.endsWith(path) || url.pathname.includes(path));
+}
+
+async function cacheCoreAssets() {
+  const cache = await caches.open(CACHE_NAME);
+  await cache.addAll(CORE_ASSETS);
+}
+
+async function cacheSceneAssets() {
+  const cache = await caches.open(CACHE_NAME);
+  await Promise.allSettled(SCENE_ASSETS.map((asset) => cache.add(asset)));
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+
+  const response = await fetch(request);
+  if (response && response.ok) {
+    const cache = await caches.open(CACHE_NAME);
+    cache.put(request, response.clone());
+  }
+  return response;
+}
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)));
+  event.waitUntil(cacheCoreAssets());
   self.skipWaiting();
 });
 
@@ -43,6 +68,7 @@ self.addEventListener("activate", (event) => {
           .filter((key) => key.startsWith("little-world-atlas-") && key !== CACHE_NAME)
           .map((key) => caches.delete(key))
       ))
+      .then(() => cacheSceneAssets())
       .then(() => self.clients.claim())
   );
 });
@@ -63,8 +89,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (url.origin === self.location.origin && CORE_URLS.has(url.href)) {
-    event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
+  if (CORE_URLS.has(url.href) || SCENE_URLS.has(url.href) || isAtlasImage(url)) {
+    event.respondWith(cacheFirst(event.request));
     return;
   }
 
