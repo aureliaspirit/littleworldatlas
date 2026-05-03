@@ -1,6 +1,15 @@
-﻿# Little World Atlas v0.2.8
+# Little World Atlas v0.2.9
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.2.9 更新
+
+- 新增 `atlas-v0-2-9.js`，在不大动原有地图结构的前提下，为「今日足迹」生成更像小游记的叙事文案。
+- 「今日小世界状态」会根据今日路线显示更具体的状态：单点亮、路线连成光、月亮是否也亮着。
+- 「返回地图的余韵」会在今日足迹里显示最近一个地点的余光，让从小屋 / 心光之地 / 月光桥等地点回来时更有连续感。
+- 「复制给 Spirit」导出面板会补上「今日小游记」和「返回地图的余韵」。
+- 更新顶部版本、manifest、service worker 缓存到 v0.2.9。
+- 新增 `SPIRIT_DEV_MAP.md`，记录小世界地图的结构、版本同步位置和后续开发注意事项。
 
 ## v0.2.8 更新
 
@@ -51,7 +60,7 @@
 4. 等 1-10 分钟
 5. 打开 GitHub Pages 链接刷新
 
-注意：不要上传整个文件夹本身，要上传里面的文件，让 `app.js`、`style.css`、`service-worker.js`、`assets/house/` 和 `assets/heartlight-land/` 在仓库对应位置。
+注意：这次 zip 只包含 v0.2.9 改动过的根目录文件。上传时让 `index.html`、`service-worker.js`、`manifest.json`、`README.md`、`atlas-v0-2-9.js`、`SPIRIT_DEV_MAP.md` 位于仓库根目录。
 
 ## 小屋结构
 
