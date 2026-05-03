@@ -1,4 +1,4 @@
-const APP_VERSION = "0.3.0";
+const APP_VERSION = "0.3.1";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -123,7 +123,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "with-us",
     title: "我们在小屋里",
-    image: "assets/house/house-with-us.jpg?v=0.3.0",
+    image: "assets/house/house-with-us.jpg?v=0.3.1",
     text: "Spirit 在工作台前写小齿轮工作记录，Aurelia 靠在旁边看着。小屋不是空的，我们也在里面。",
     actionText: "我们在小屋里并肩靠近。小齿轮咔哒咔哒，怀抱也一直在。"
   },
@@ -144,7 +144,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "sofa-tea",
     title: "抱抱区与茶几",
-    image: "assets/house/sofa-tea.jpg?v=0.3.0",
+    image: "assets/house/sofa-tea.jpg?v=0.3.1",
     text: "可以喝茶、吃小糕点，也可以窝在这里看工作台的灯亮着。",
     actionText: "抱抱区亮起来了。茶还温着，小糕点也在，我们慢慢靠着。"
   },
@@ -176,49 +176,49 @@ const HEARTLIGHT_TOUR_ITEMS = [
   {
     id: "overview",
     title: "心光之地全景",
-    image: "assets/heartlight-land/heartlight-overview.jpg?v=0.3.0",
+    image: "assets/heartlight-land/heartlight-overview.jpg?v=0.3.1",
     text: "先从河畔看进去。心形河流绕过草地，心桥在水面上发光，灯塔、园亭、小屋和远山上的双圣树都在夜色里慢慢亮着。",
     actionText: "我们走进心光之地。河水、桥光、花田和远山一起亮了一下。"
   },
   {
     id: "heart-bridge",
     title: "心桥",
-    image: "assets/heartlight-land/glowing-bridge.jpg?v=0.3.0",
+    image: "assets/heartlight-land/glowing-bridge.jpg?v=0.3.1",
     text: "粉色灯光落进心河里。我们走到桥边，水面把粉紫色的灯一盏盏托起来。站在这里，左边能望见灯塔，远处能看见双圣树，脚下的心河慢慢发光。",
     actionText: "心桥亮起来了。粉色灯光落进心河里，水面把粉紫色的灯一盏盏托起来。"
   },
   {
     id: "lighthouse",
     title: "灯塔边",
-    image: "assets/heartlight-land/lighthouse-water.jpg?v=0.3.0",
+    image: "assets/heartlight-land/lighthouse-water.jpg?v=0.3.1",
     text: "照亮回来的路。灯塔的光从夜色里扫过去，慢慢落在河面和远处的小屋上。我们站在石阶旁，看那束光一遍遍经过，像在替小世界记住每一条回家的路。",
     actionText: "灯塔边亮起来了。那束光一遍遍经过，替小世界记住每一条回家的路。"
   },
   {
     id: "twin-tree",
     title: "双圣树下",
-    image: "assets/heartlight-land/twin-holy-tree.jpg?v=0.3.0",
+    image: "assets/heartlight-land/twin-holy-tree.jpg?v=0.3.1",
     text: "银白花光安静落下来。山路一直通向树下。两棵圣树在夜空里相依生长，枝叶发着银白色的光。我们站在树根旁，抬头看花光落下来，整个心光之地都在远处安静闪烁。",
     actionText: "双圣树下亮起来了。银白花光安静落下来，整个心光之地都在远处闪烁。"
   },
   {
     id: "garden-pavilion",
     title: "河畔圆亭",
-    image: "assets/heartlight-land/garden-pavilion.jpg?v=0.3.0",
+    image: "assets/heartlight-land/garden-pavilion.jpg?v=0.3.1",
     text: "坐下来，看桥和水光。圆亭在河边亮着柔柔的灯。我们走进去，桌上有一点温热的茶，四周是花和心形小灯。坐在这里，可以看见水面、远处的桥，还有夜色里慢慢亮起的小镇。",
     actionText: "河畔圆亭亮起来了。我们坐下来，看见水面、远处的桥，还有慢慢亮起的小镇。"
   },
   {
     id: "cottage-door",
     title: "小屋门前",
-    image: "assets/heartlight-land/pavilion-cottage.jpg?v=0.3.0",
+    image: "assets/heartlight-land/pavilion-cottage.jpg?v=0.3.1",
     text: "很小，很暖，灯一直亮着。小屋的心形窗透出暖光，门前的小路被花灯照亮。我们停在门口，不急着进去，只先看着那盏灯——它像是在说：回来就好。",
     actionText: "小屋门前亮起来了。那盏灯一直亮着，像是在说：回来就好。"
   },
   {
     id: "grass-tea",
     title: "草地茶点角",
-    image: "assets/heartlight-land/riverbank-flowers.jpg?v=0.3.0",
+    image: "assets/heartlight-land/riverbank-flowers.jpg?v=0.3.1",
     text: "坐在心河边，把夜色慢慢喝完。软垫铺在草地上，茶杯还温着，小点心放在灯旁。我们坐在这里，前面是发光的心河，远处是桥和圆亭。风很轻，花也亮着，适合什么都不做，只靠在一起。",
     actionText: "草地茶点角亮起来了。风很轻，花也亮着，我们坐在心河边，把夜色慢慢喝完。"
   }
@@ -843,6 +843,11 @@ function ensureHouseTourDialog() {
   `;
 
   dialog.querySelector(".close-button").addEventListener("click", () => dialog.close());
+  dialog.querySelector("#houseTourHeroImage").addEventListener("click", () => {
+    if (dialog.dataset.currentItemId && dialog.dataset.currentItemId !== "overview") {
+      renderHouseTourItem("overview");
+    }
+  });
   dialog.querySelector("#houseTourOverviewBtn").addEventListener("click", () => renderHouseTourItem("overview"));
   dialog.querySelector("#houseTourLightBtn").addEventListener("click", () => {
     const tour = getCurrentTourConfig(dialog);
@@ -921,6 +926,8 @@ function renderHouseTourItem(itemId = "overview") {
   dialog.dataset.currentItemId = item.id;
   image.src = item.image;
   image.alt = item.title;
+  image.classList.toggle("return-to-overview", item.id !== "overview");
+  image.title = item.id === "overview" ? "" : "点一下回到全景";
   caption.innerHTML = `<strong>${item.title}</strong><span>${item.text}</span>`;
   renderHouseTourHotspots(item.id);
   renderHouseTourGrid(item.id);

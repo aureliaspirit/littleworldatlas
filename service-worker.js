@@ -1,11 +1,11 @@
-const CACHE_NAME = "little-world-atlas-v0-3-0";
+const CACHE_NAME = "little-world-atlas-v0-3-1";
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.3.0",
-  "./app.js?v=0.3.0",
-  "./manifest.json?v=0.3.0",
+  "./style.css?v=0.3.1",
+  "./app.js?v=0.3.1",
+  "./manifest.json?v=0.3.1",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
@@ -16,7 +16,7 @@ const CORE_ASSETS = [
 
 const SCENE_ASSETS = [
   "./assets/house/house-overview.jpg",
-  "./assets/heartlight-land/heartlight-overview.jpg?v=0.3.0"
+  "./assets/heartlight-land/heartlight-overview.jpg?v=0.3.1"
 ];
 
 const RUNTIME_IMAGE_PATHS = [

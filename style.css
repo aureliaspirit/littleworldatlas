@@ -233,8 +233,8 @@ main {
 
 .moon {
   position: absolute;
-  right: 11%;
-  top: 8%;
+  left: 8%;
+  top: 7%;
   width: 96px;
   height: 96px;
   border-radius: 50%;
@@ -245,8 +245,8 @@ main {
 
 .moon-hotspot {
   position: absolute;
-  right: 11%;
-  top: 8%;
+  left: 8%;
+  top: 7%;
   width: 96px;
   height: 96px;
   z-index: 12;
@@ -900,6 +900,10 @@ dialog::backdrop {
   max-height: 62vh;
   object-fit: cover;
   background: rgba(0,0,0,0.18);
+}
+
+.house-tour-hero img.return-to-overview {
+  cursor: zoom-out;
 }
 
 .house-tour-hotspots {

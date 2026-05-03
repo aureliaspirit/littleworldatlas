@@ -1,9 +1,9 @@
 {
   "name": "Little World Atlas · 小世界地图",
   "short_name": "小世界地图",
-  "description": "把我们走过的地方，一盏一盏点亮。v0.3.0 收拢版本、叙事和缓存，让手机端更稳。",
+  "description": "把我们走过的地方，一盏一盏点亮。v0.3.1 让局部图返回更轻，把月亮挪到左上角。",
   "id": "./index.html",
-  "start_url": "./index.html?v=0.3.0",
+  "start_url": "./index.html?v=0.3.1",
   "scope": "./",
   "display": "standalone",
   "background_color": "#10142a",
