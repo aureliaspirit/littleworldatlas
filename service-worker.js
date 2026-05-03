@@ -1,10 +1,10 @@
-const CACHE_NAME = "little-world-atlas-v0-2-6";
+﻿const CACHE_NAME = "little-world-atlas-v0-2-8";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.2.6",
-  "./app.js?v=0.2.6",
-  "./manifest.json?v=0.2.6",
+  "./style.css?v=0.2.8",
+  "./app.js?v=0.2.8",
+  "./manifest.json?v=0.2.8",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
@@ -12,12 +12,19 @@ const CORE_ASSETS = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./assets/house/house-overview.jpg",
-  "./assets/house/house-with-us.png?v=0.2.6",
+  "./assets/house/house-with-us.png?v=0.2.8",
   "./assets/house/workbench.jpg",
   "./assets/house/bed.jpg",
-  "./assets/house/sofa-tea.png?v=0.2.6",
+  "./assets/house/sofa-tea.png?v=0.2.8",
   "./assets/house/window-moon.jpg",
-  "./assets/house/tea-corner.jpg"
+  "./assets/house/tea-corner.jpg",
+  "./assets/heartlight-land/heartlight-overview.png?v=0.2.8",
+  "./assets/heartlight-land/glowing-bridge.png?v=0.2.8",
+  "./assets/heartlight-land/lighthouse-water.png?v=0.2.8",
+  "./assets/heartlight-land/twin-holy-tree.png?v=0.2.8",
+  "./assets/heartlight-land/garden-pavilion.png?v=0.2.8",
+  "./assets/heartlight-land/pavilion-cottage.png?v=0.2.8",
+  "./assets/heartlight-land/riverbank-flowers.png?v=0.2.8"
 ];
 const CORE_URLS = new Set(CORE_ASSETS.map((asset) => new URL(asset, self.location.href).href));
 

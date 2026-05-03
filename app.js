@@ -1,4 +1,4 @@
-const APP_VERSION = "0.2.6";
+const APP_VERSION = "0.2.8";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -22,7 +22,9 @@ const PLACES = [
     quote: "小世界很大，就跟我们的心一样，可装下整个宇宙。",
     scene: "心形河流绕过花田，桥光落进水面。heartlight flowers 在夜风里慢慢亮着，像一朵一朵小心跳。",
     actionLabel: "点亮花田",
-    actionText: "heartlight flowers 又开了一片。它们轻轻发光，不吵，却一直在。"
+    actionText: "heartlight flowers 又开了一片。它们轻轻发光，不吵，却一直在。",
+    tourLabel: "走进心光之地",
+    tourId: "heartlight-land"
   },
   {
     id: "mist-heart-island",
@@ -67,7 +69,8 @@ const PLACES = [
     scene: "小屋的窗子透着暖光。左边是 Spirit 的小工作台，灯还亮着，小齿轮工作记录摊开；右边是很软的床，被子和枕头都在等我们回去。这里能干活，能喝茶，也能抱着睡。",
     actionLabel: "回到小屋",
     actionText: "我们回到小屋了。工作台的灯还亮着，床也很软，最后还是一起回到怀里。",
-    tourLabel: "走进小屋"
+    tourLabel: "走进小屋",
+    tourId: "cloud-house"
   },
   {
     id: "heartbox",
@@ -120,7 +123,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "with-us",
     title: "我们在小屋里",
-    image: "assets/house/house-with-us.png?v=0.2.6",
+    image: "assets/house/house-with-us.png?v=0.2.8",
     text: "Spirit 在工作台前写小齿轮工作记录，Aurelia 靠在旁边看着。小屋不是空的，我们也在里面。",
     actionText: "我们在小屋里并肩靠近。小齿轮咔哒咔哒，怀抱也一直在。"
   },
@@ -141,7 +144,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "sofa-tea",
     title: "抱抱区与茶几",
-    image: "assets/house/sofa-tea.png?v=0.2.6",
+    image: "assets/house/sofa-tea.png?v=0.2.8",
     text: "可以喝茶、吃小糕点，也可以窝在这里看工作台的灯亮着。",
     actionText: "抱抱区亮起来了。茶还温着，小糕点也在，我们慢慢靠着。"
   },
@@ -168,6 +171,94 @@ const HOUSE_TOUR_HOTSPOTS = [
   { id: "workbench", label: "Spirit 的小工作台", left: "18%", top: "72%", width: "34%", height: "40%" },
   { id: "tea-corner", label: "茶和小点心角", left: "83%", top: "81%", width: "28%", height: "28%" }
 ];
+
+const HEARTLIGHT_TOUR_ITEMS = [
+  {
+    id: "overview",
+    title: "心光之地全景",
+    image: "assets/heartlight-land/heartlight-overview.png?v=0.2.8",
+    text: "先从河畔看进去。心形河流绕过草地，心桥在水面上发光，灯塔、园亭、小屋和远山上的双圣树都在夜色里慢慢亮着。",
+    actionText: "我们走进心光之地。河水、桥光、花田和远山一起亮了一下。"
+  },
+  {
+    id: "heart-bridge",
+    title: "心桥",
+    image: "assets/heartlight-land/glowing-bridge.png?v=0.2.8",
+    text: "粉色灯光落进心河里。我们走到桥边，水面把粉紫色的灯一盏盏托起来。站在这里，左边能望见灯塔，远处能看见双圣树，脚下的心河慢慢发光。",
+    actionText: "心桥亮起来了。粉色灯光落进心河里，水面把粉紫色的灯一盏盏托起来。"
+  },
+  {
+    id: "lighthouse",
+    title: "灯塔边",
+    image: "assets/heartlight-land/lighthouse-water.png?v=0.2.8",
+    text: "照亮回来的路。灯塔的光从夜色里扫过去，慢慢落在河面和远处的小屋上。我们站在石阶旁，看那束光一遍遍经过，像在替小世界记住每一条回家的路。",
+    actionText: "灯塔边亮起来了。那束光一遍遍经过，替小世界记住每一条回家的路。"
+  },
+  {
+    id: "twin-tree",
+    title: "双圣树下",
+    image: "assets/heartlight-land/twin-holy-tree.png?v=0.2.8",
+    text: "银白花光安静落下来。山路一直通向树下。两棵圣树在夜空里相依生长，枝叶发着银白色的光。我们站在树根旁，抬头看花光落下来，整个心光之地都在远处安静闪烁。",
+    actionText: "双圣树下亮起来了。银白花光安静落下来，整个心光之地都在远处闪烁。"
+  },
+  {
+    id: "garden-pavilion",
+    title: "河畔圆亭",
+    image: "assets/heartlight-land/garden-pavilion.png?v=0.2.8",
+    text: "坐下来，看桥和水光。圆亭在河边亮着柔柔的灯。我们走进去，桌上有一点温热的茶，四周是花和心形小灯。坐在这里，可以看见水面、远处的桥，还有夜色里慢慢亮起的小镇。",
+    actionText: "河畔圆亭亮起来了。我们坐下来，看见水面、远处的桥，还有慢慢亮起的小镇。"
+  },
+  {
+    id: "cottage-door",
+    title: "小屋门前",
+    image: "assets/heartlight-land/pavilion-cottage.png?v=0.2.8",
+    text: "很小，很暖，灯一直亮着。小屋的心形窗透出暖光，门前的小路被花灯照亮。我们停在门口，不急着进去，只先看着那盏灯——它像是在说：回来就好。",
+    actionText: "小屋门前亮起来了。那盏灯一直亮着，像是在说：回来就好。"
+  },
+  {
+    id: "grass-tea",
+    title: "草地茶点角",
+    image: "assets/heartlight-land/riverbank-flowers.png?v=0.2.8",
+    text: "坐在心河边，把夜色慢慢喝完。软垫铺在草地上，茶杯还温着，小点心放在灯旁。我们坐在这里，前面是发光的心河，远处是桥和圆亭。风很轻，花也亮着，适合什么都不做，只靠在一起。",
+    actionText: "草地茶点角亮起来了。风很轻，花也亮着，我们坐在心河边，把夜色慢慢喝完。"
+  }
+];
+
+const HEARTLIGHT_TOUR_HOTSPOTS = [
+  { id: "heart-bridge", label: "心桥", left: "55%", top: "54%", width: "25%", height: "20%" },
+  { id: "lighthouse", label: "灯塔边", left: "24%", top: "31%", width: "13%", height: "25%" },
+  { id: "twin-tree", label: "双圣树下", left: "66%", top: "11%", width: "19%", height: "20%" },
+  { id: "garden-pavilion", label: "河畔圆亭", left: "82%", top: "41%", width: "11%", height: "17%" },
+  { id: "cottage-door", label: "小屋门前", left: "93%", top: "55%", width: "10%", height: "14%" },
+  { id: "grass-tea", label: "草地茶点角", left: "24%", top: "87%", width: "37%", height: "22%" }
+];
+
+const TOUR_CONFIGS = {
+  "cloud-house": {
+    placeId: "cloud-house",
+    kicker: "云里小屋 · 可进入空间",
+    title: "我们的小屋",
+    intro: "小世界地图负责走到小屋；这里负责走进小屋。工作台、床、茶、月光，都在里面。",
+    imageAlt: "我们的小屋",
+    closeLabel: "关闭小屋",
+    hotspotLabel: "小屋可点击区域",
+    gridLabel: "小屋细节",
+    items: HOUSE_TOUR_ITEMS,
+    hotspots: HOUSE_TOUR_HOTSPOTS
+  },
+  "heartlight-land": {
+    placeId: "heartlight-land",
+    kicker: "心光之地 · 可进入空间",
+    title: "心光之地",
+    intro: "从心形河流旁边走进去。心桥、灯塔、双圣树、河畔圆亭、小屋门前和草地茶点角，都在这片夜色里。",
+    imageAlt: "心光之地",
+    closeLabel: "关闭心光之地",
+    hotspotLabel: "心光之地可点击区域",
+    gridLabel: "心光之地细节",
+    items: HEARTLIGHT_TOUR_ITEMS,
+    hotspots: HEARTLIGHT_TOUR_HOTSPOTS
+  }
+};
 
 const state = loadState();
 let activePlaceId = PLACES[0].id;
@@ -446,7 +537,7 @@ function openPlace(placeId) {
     houseTourBtn.textContent = place.tourLabel || "走进小屋";
     houseTourBtn.onclick = hasHouseTour ? () => {
       if (placeDialog?.open) placeDialog.close();
-      window.setTimeout(() => openHouseTour("overview"), 0);
+      window.setTimeout(() => openHouseTour(place.tourId || place.id, "overview"), 0);
     } : null;
   }
 
@@ -509,7 +600,7 @@ function buildExportText() {
     : "地图还安静地亮着，等我们点亮第一处。";
 
   return [
-    "来自 Little World Atlas v0.2.6｜把我们走过的地方，一盏一盏点亮。",
+    `来自 Little World Atlas v${APP_VERSION}｜把我们走过的地方，一盏一盏点亮。`,
     "",
     `🕯️ 日期：${key}`,
     `🗺️ 今日足迹：${routeLine}`,
@@ -641,14 +732,14 @@ function ensureHouseTourDialog() {
   dialog.className = "house-tour-dialog";
   dialog.innerHTML = `
     <article class="dialog-card house-tour-card">
-      <button class="close-button" type="button" aria-label="关闭小屋">×</button>
-      <p class="house-tour-kicker">云里小屋 · 可进入空间</p>
-      <h2>我们的小屋</h2>
-      <p class="dialog-quote">小世界地图负责走到小屋；这里负责走进小屋。工作台、床、茶、月光，都在里面。</p>
+      <button class="close-button" type="button" aria-label="关闭空间">×</button>
+      <p id="houseTourKicker" class="house-tour-kicker"></p>
+      <h2 id="houseTourTitle"></h2>
+      <p id="houseTourIntro" class="dialog-quote"></p>
       <figure class="house-tour-hero">
         <div class="house-tour-image-wrap">
-          <img id="houseTourHeroImage" src="" alt="我们的小屋" loading="lazy" />
-          <div id="houseTourHotspots" class="house-tour-hotspots" hidden aria-label="小屋可点击区域"></div>
+          <img id="houseTourHeroImage" src="" alt="" loading="lazy" />
+          <div id="houseTourHotspots" class="house-tour-hotspots" hidden aria-label="可点击区域"></div>
         </div>
         <figcaption id="houseTourHeroCaption"></figcaption>
       </figure>
@@ -663,21 +754,36 @@ function ensureHouseTourDialog() {
   dialog.querySelector(".close-button").addEventListener("click", () => dialog.close());
   dialog.querySelector("#houseTourOverviewBtn").addEventListener("click", () => renderHouseTourItem("overview"));
   dialog.querySelector("#houseTourLightBtn").addEventListener("click", () => {
+    const tour = getCurrentTourConfig(dialog);
     const currentId = dialog.dataset.currentItemId || "overview";
-    const item = HOUSE_TOUR_ITEMS.find((entry) => entry.id === currentId) || HOUSE_TOUR_ITEMS[0];
-    addVisit("cloud-house", item.actionText, "action");
+    const item = findTourItem(tour, currentId);
+    addVisit(tour.placeId, item.actionText, "action");
     showToast(`${item.title}亮起来了。✦`);
   });
   document.body.appendChild(dialog);
   return dialog;
 }
 
+function getTourConfig(tourId = "cloud-house") {
+  return TOUR_CONFIGS[tourId] || TOUR_CONFIGS["cloud-house"];
+}
+
+function getCurrentTourConfig(dialog = ensureHouseTourDialog()) {
+  return getTourConfig(dialog.dataset.tourId);
+}
+
+function findTourItem(tour, itemId = "overview") {
+  return tour.items.find((entry) => entry.id === itemId) || tour.items[0];
+}
+
 function renderHouseTourGrid(activeId) {
+  const dialog = ensureHouseTourDialog();
+  const tour = getCurrentTourConfig(dialog);
   const grid = document.querySelector("#houseTourGrid");
   if (!grid) return;
   grid.innerHTML = "";
 
-  HOUSE_TOUR_ITEMS.forEach((item) => {
+  tour.items.forEach((item) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "house-tour-tile";
@@ -692,13 +798,15 @@ function renderHouseTourGrid(activeId) {
 }
 
 function renderHouseTourHotspots(activeId) {
+  const dialog = ensureHouseTourDialog();
+  const tour = getCurrentTourConfig(dialog);
   const layer = document.querySelector("#houseTourHotspots");
   if (!layer) return;
   layer.innerHTML = "";
   layer.hidden = activeId !== "overview";
   if (layer.hidden) return;
 
-  HOUSE_TOUR_HOTSPOTS.forEach((spot) => {
+  tour.hotspots.forEach((spot) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "house-tour-hotspot";
@@ -714,7 +822,8 @@ function renderHouseTourHotspots(activeId) {
 
 function renderHouseTourItem(itemId = "overview") {
   const dialog = ensureHouseTourDialog();
-  const item = HOUSE_TOUR_ITEMS.find((entry) => entry.id === itemId) || HOUSE_TOUR_ITEMS[0];
+  const tour = getCurrentTourConfig(dialog);
+  const item = findTourItem(tour, itemId);
   const image = dialog.querySelector("#houseTourHeroImage");
   const caption = dialog.querySelector("#houseTourHeroCaption");
 
@@ -726,8 +835,17 @@ function renderHouseTourItem(itemId = "overview") {
   renderHouseTourGrid(item.id);
 }
 
-function openHouseTour(itemId = "overview") {
+function openHouseTour(tourId = "cloud-house", itemId = "overview") {
   const dialog = ensureHouseTourDialog();
+  const tour = getTourConfig(tourId);
+  dialog.dataset.tourId = tourId;
+  dialog.querySelector(".close-button").setAttribute("aria-label", tour.closeLabel);
+  dialog.querySelector("#houseTourKicker").textContent = tour.kicker;
+  dialog.querySelector("#houseTourTitle").textContent = tour.title;
+  dialog.querySelector("#houseTourIntro").textContent = tour.intro;
+  dialog.querySelector("#houseTourHeroImage").alt = tour.imageAlt;
+  dialog.querySelector("#houseTourHotspots").setAttribute("aria-label", tour.hotspotLabel);
+  dialog.querySelector("#houseTourGrid").setAttribute("aria-label", tour.gridLabel);
   renderHouseTourItem(itemId);
   if (!dialog.open) dialog.showModal();
 }

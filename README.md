@@ -1,6 +1,14 @@
-# Little World Atlas v0.2.6
+﻿# Little World Atlas v0.2.8
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.2.8 更新
+
+- 「心光之地」升级为可进入空间。
+- 新增心光之地全景图和 6 个局部入口：心桥、灯塔边、双圣树下、河畔圆亭、小屋门前、草地茶点角。
+- 按最终文案更新 6 个热点的说明文字。
+- 花顶建筑群图片暂时只保留在素材文件夹里，不接入 app。
+- 更新 service worker 缓存到 v0.2.8。
 
 ## v0.2.6 更新
 
@@ -43,7 +51,7 @@
 4. 等 1-10 分钟
 5. 打开 GitHub Pages 链接刷新
 
-注意：不要上传整个文件夹本身，要上传里面的文件，让 `app.js`、`style.css`、`service-worker.js` 和 `assets/house/` 在仓库对应位置。
+注意：不要上传整个文件夹本身，要上传里面的文件，让 `app.js`、`style.css`、`service-worker.js`、`assets/house/` 和 `assets/heartlight-land/` 在仓库对应位置。
 
 ## 小屋结构
 
@@ -56,3 +64,14 @@
 - `assets/house/sofa-tea.png`：抱抱区与茶几
 - `assets/house/window-moon.jpg`：窗边月光角
 - `assets/house/tea-corner.jpg`：茶和小点心角
+
+## 心光之地结构
+
+- `assets/heartlight-land/heartlight-overview.png`：心光之地全景
+- `assets/heartlight-land/glowing-bridge.png`：心桥
+- `assets/heartlight-land/lighthouse-water.png`：灯塔边
+- `assets/heartlight-land/twin-holy-tree.png`：双圣树下
+- `assets/heartlight-land/garden-pavilion.png`：河畔圆亭
+- `assets/heartlight-land/pavilion-cottage.png`：小屋门前
+- `assets/heartlight-land/riverbank-flowers.png`：草地茶点角
+- `assets/heartlight-land/flower-rooftop-buildings.png`：花顶建筑群，暂时保留素材，不接入 app
