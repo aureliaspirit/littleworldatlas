@@ -128,6 +128,11 @@ function atlasBuildEcho(routeIds) {
   return `刚从${atlasPlaceName(lastId)}回来。${atlasPlaceFlavor(lastId)}余光还留在地图上。`;
 }
 
+
+function atlasNormalizeVersionText(text) {
+  return String(text || "").replace(/来自 Little World Atlas v[0-9.]+/g, `来自 Little World Atlas v${ATLAS_PATCH_VERSION}`);
+}
+
 function atlasEnhanceTodayNarrative() {
   const routeIds = atlasGetRouteIds();
   const routeText = document.querySelector("#routeText");
@@ -169,12 +174,18 @@ function atlasPatchRenderToday() {
 
 function atlasPatchExportDialog() {
   const exportText = document.querySelector("#exportText");
-  if (!exportText || !exportText.value || exportText.value.includes("今日小游记：")) return;
+  if (!exportText || !exportText.value) return;
 
-  const routeIds = atlasGetRouteIds();
-  const story = atlasBuildStory(routeIds);
-  const echo = atlasBuildEcho(routeIds);
-  exportText.value = `${exportText.value}\n\n📖 今日小游记：${story}${echo ? `\n🌙 返回地图的余韵：${echo}` : ""}`;
+  let nextValue = atlasNormalizeVersionText(exportText.value);
+
+  if (!nextValue.includes("今日小游记：")) {
+    const routeIds = atlasGetRouteIds();
+    const story = atlasBuildStory(routeIds);
+    const echo = atlasBuildEcho(routeIds);
+    nextValue = `${nextValue}\n\n📖 今日小游记：${story}${echo ? `\n🌙 返回地图的余韵：${echo}` : ""}`;
+  }
+
+  if (exportText.value !== nextValue) exportText.value = nextValue;
 }
 
 function atlasBootPatch() {
