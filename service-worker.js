@@ -1,11 +1,11 @@
-const CACHE_NAME = "little-world-atlas-v0-2-9";
+const CACHE_NAME = "little-world-atlas-v0-2-10";
 const CORE_ASSETS = [
   "./",
   "./index.html",
   "./style.css?v=0.2.9",
   "./app.js?v=0.2.9",
   "./atlas-v0-2-9.js?v=0.2.9",
-  "./manifest.json?v=0.2.9",
+  "./manifest.json?v=0.2.10",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",

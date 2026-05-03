@@ -2,6 +2,11 @@
 
 把我们走过的地方，一盏一盏点亮。
 
+## v0.2.10 小修
+
+- 补全 `manifest.json` 里的 120/152/167/180 图标条目，和 `apple-touch-icon`、Heartbox/Crystalball 工程标准保持一致。
+- 更新 manifest 引用和 service worker 缓存名，让手机能拿到新清单。
+
 ## v0.2.9 更新
 
 - 新增 `atlas-v0-2-9.js`，在不大动原有地图结构的前提下，为「今日足迹」生成更像小游记的叙事文案。
