@@ -1,4 +1,4 @@
-# SPIRIT_DEV_MAP · Little World Atlas
+﻿# SPIRIT_DEV_MAP · Little World Atlas
 
 这份地图给 Spirit / Codex / 未来维护者用，避免把小世界地图改乱。
 
@@ -65,13 +65,17 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 
 - `cloud-house`
 - `heartlight-land`
+- `heartlight-journey`：挂在 `heartlight-land` 里面的旅程记录，不作为地图上的独立地点。
 
 对应配置在 `TOUR_CONFIGS`，素材分别在：
 
 - `assets/house/`
 - `assets/heartlight-land/`
+- `assets/heartlight-land/journey/`
+- `assets/heartlight-land/journey/originals/`：旅程原始大图，只作源素材，不在页面中直接加载。
 
 新增可进入地点时，优先沿用 `TOUR_CONFIGS` 模式，不要另起一套不兼容结构。
+新增「某个空间里的旅程」时，可以像 `heartlight-journey` 一样复用 `TOUR_CONFIGS`，并用 `parentTourId` / `parentLabel` 接回原空间。
 
 ## v0.3.0 叙事与缓存规则
 
@@ -94,11 +98,14 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 
 - `.jpg` 是 app 运行图，优先用于页面和缓存。
 - 同名 `.png` 是源素材，保留给后续迭代识别来路，不默认缓存。
+- `assets/heartlight-land/journey/` 里的旅程图也是运行图，按需加载并进入 runtime cache，不放进安装期核心缓存。
+- `assets/heartlight-land/journey/originals/` 里的 `.png` 是未压缩源图，后续重裁切或重压缩从这里取，不要写进 `app.js` 图片路径。
 
 ## 下一次迭代入口
 
 - 新增地点：改 `app.js` 的 `PLACES`。
 - 新增可进入空间：改 `TOUR_CONFIGS`，并新增对应 `*_TOUR_ITEMS` / `*_TOUR_HOTSPOTS`。
+- 新增空间内旅程：参考 `HEARTLIGHT_JOURNEY_ITEMS` 和 `heartlight-journey`，从父空间配置里用 `journeyTourId` 接进去。
 - 改热点：改 `app.js` 里的对应 `*_TOUR_HOTSPOTS`。
 - 改缓存：改 `service-worker.js` 的 `CORE_ASSETS`、`SCENE_ASSETS`、`RUNTIME_IMAGE_PATHS`。
 - 改导出文案：改 `app.js` 的 `buildExportText`、`atlasBuildStory`、`atlasBuildStatus`、`atlasBuildEcho`。
@@ -113,3 +120,4 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 - 刷新地图后不读旧 cache。
 - 小屋和心光之地的全景 / 局部图仍可打开。
 - 打开局部图后，点主图可以回到全景。
+

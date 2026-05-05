@@ -1,6 +1,19 @@
-# Little World Atlas v0.3.1
+﻿# Little World Atlas v0.3.3
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.3.3 旅程显示修正
+
+- 「灯塔与双圣树之旅」里的竖图改为完整显示，不再按全景图比例裁切上下。
+- 「回家」片段改用地图里真正的「我们的小屋」图片。
+- 旅程原始大图保存在 `assets/heartlight-land/journey/originals/`，网页继续使用同目录下的压缩 jpg。
+
+## v0.3.2 灯塔与双圣树之旅
+
+- 在「心光之地」可进入空间里新增「灯塔与双圣树之旅」入口。
+- 新增 5 个旅程片段：灯塔顶层、心河泛舟、双圣树深处、摸到双圣树、回家。
+- 接入压缩后的旅程图片，放在 `assets/heartlight-land/journey/`，由 runtime image cache 按需缓存；原始大图放在 `assets/heartlight-land/journey/originals/`，不由页面加载。
+- 保留原来的心光之地全景图、6 个热点和下方细节列表，不减少现有内容。
 
 ## v0.3.1 小体验优化
 
@@ -113,3 +126,5 @@
 - 改热点：改 `app.js` 中对应空间的 `*_TOUR_HOTSPOTS`。
 - 改缓存：改 `service-worker.js` 的 `CORE_ASSETS`、`SCENE_ASSETS` 或 runtime image 规则。
 - 改导出文案：改 `app.js` 的 `buildExportText`、`atlasBuildStory`、`atlasBuildStatus`、`atlasBuildEcho`。
+
+

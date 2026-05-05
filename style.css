@@ -893,6 +893,12 @@ dialog::backdrop {
   overflow: hidden;
 }
 
+.journey-tour .house-tour-image-wrap {
+  display: flex;
+  justify-content: center;
+  background: rgba(8, 12, 28, 0.34);
+}
+
 .house-tour-hero img,
 .house-tour-image-wrap img {
   display: block;
@@ -900,6 +906,15 @@ dialog::backdrop {
   max-height: 62vh;
   object-fit: cover;
   background: rgba(0,0,0,0.18);
+}
+
+.journey-tour .house-tour-hero img,
+.journey-tour .house-tour-image-wrap img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(76vh, 920px);
+  object-fit: contain;
 }
 
 .house-tour-hero img.return-to-overview {
@@ -1011,6 +1026,11 @@ dialog::backdrop {
   .house-tour-hero img,
   .house-tour-image-wrap img {
     max-height: 46vh;
+  }
+
+  .journey-tour .house-tour-hero img,
+  .journey-tour .house-tour-image-wrap img {
+    max-height: 72vh;
   }
 
   .house-tour-hotspot {
