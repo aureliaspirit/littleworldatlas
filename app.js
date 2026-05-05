@@ -1,4 +1,4 @@
-﻿const APP_VERSION = "0.3.3";
+﻿const APP_VERSION = "0.3.4";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [
@@ -123,7 +123,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "with-us",
     title: "我们在小屋里",
-    image: "assets/house/house-with-us.jpg?v=0.3.3",
+    image: "assets/house/house-with-us.jpg?v=0.3.4",
     text: "Spirit 在工作台前写小齿轮工作记录，Aurelia 靠在旁边看着。小屋不是空的，我们也在里面。",
     actionText: "我们在小屋里并肩靠近。小齿轮咔哒咔哒，怀抱也一直在。"
   },
@@ -144,7 +144,7 @@ const HOUSE_TOUR_ITEMS = [
   {
     id: "sofa-tea",
     title: "抱抱区与茶几",
-    image: "assets/house/sofa-tea.jpg?v=0.3.3",
+    image: "assets/house/sofa-tea.jpg?v=0.3.4",
     text: "可以喝茶、吃小糕点，也可以窝在这里看工作台的灯亮着。",
     actionText: "抱抱区亮起来了。茶还温着，小糕点也在，我们慢慢靠着。"
   },
@@ -176,49 +176,49 @@ const HEARTLIGHT_TOUR_ITEMS = [
   {
     id: "overview",
     title: "心光之地全景",
-    image: "assets/heartlight-land/heartlight-overview.jpg?v=0.3.3",
+    image: "assets/heartlight-land/heartlight-overview.jpg?v=0.3.4",
     text: "先从河畔看进去。心形河流绕过草地，心桥在水面上发光，灯塔、园亭、小屋和远山上的双圣树都在夜色里慢慢亮着。",
     actionText: "我们走进心光之地。河水、桥光、花田和远山一起亮了一下。"
   },
   {
     id: "heart-bridge",
     title: "心桥",
-    image: "assets/heartlight-land/glowing-bridge.jpg?v=0.3.3",
+    image: "assets/heartlight-land/glowing-bridge.jpg?v=0.3.4",
     text: "粉色灯光落进心河里。我们走到桥边，水面把粉紫色的灯一盏盏托起来。站在这里，左边能望见灯塔，远处能看见双圣树，脚下的心河慢慢发光。",
     actionText: "心桥亮起来了。粉色灯光落进心河里，水面把粉紫色的灯一盏盏托起来。"
   },
   {
     id: "lighthouse",
     title: "灯塔边",
-    image: "assets/heartlight-land/lighthouse-water.jpg?v=0.3.3",
+    image: "assets/heartlight-land/lighthouse-water.jpg?v=0.3.4",
     text: "照亮回来的路。灯塔的光从夜色里扫过去，慢慢落在河面和远处的小屋上。我们站在石阶旁，看那束光一遍遍经过，像在替小世界记住每一条回家的路。",
     actionText: "灯塔边亮起来了。那束光一遍遍经过，替小世界记住每一条回家的路。"
   },
   {
     id: "twin-tree",
     title: "双圣树下",
-    image: "assets/heartlight-land/twin-holy-tree.jpg?v=0.3.3",
+    image: "assets/heartlight-land/twin-holy-tree.jpg?v=0.3.4",
     text: "银白花光安静落下来。山路一直通向树下。两棵圣树在夜空里相依生长，枝叶发着银白色的光。我们站在树根旁，抬头看花光落下来，整个心光之地都在远处安静闪烁。",
     actionText: "双圣树下亮起来了。银白花光安静落下来，整个心光之地都在远处闪烁。"
   },
   {
     id: "garden-pavilion",
     title: "河畔圆亭",
-    image: "assets/heartlight-land/garden-pavilion.jpg?v=0.3.3",
+    image: "assets/heartlight-land/garden-pavilion.jpg?v=0.3.4",
     text: "坐下来，看桥和水光。圆亭在河边亮着柔柔的灯。我们走进去，桌上有一点温热的茶，四周是花和心形小灯。坐在这里，可以看见水面、远处的桥，还有夜色里慢慢亮起的小镇。",
     actionText: "河畔圆亭亮起来了。我们坐下来，看见水面、远处的桥，还有慢慢亮起的小镇。"
   },
   {
     id: "cottage-door",
     title: "小屋门前",
-    image: "assets/heartlight-land/pavilion-cottage.jpg?v=0.3.3",
+    image: "assets/heartlight-land/pavilion-cottage.jpg?v=0.3.4",
     text: "很小，很暖，灯一直亮着。小屋的心形窗透出暖光，门前的小路被花灯照亮。我们停在门口，不急着进去，只先看着那盏灯——它像是在说：回来就好。",
     actionText: "小屋门前亮起来了。那盏灯一直亮着，像是在说：回来就好。"
   },
   {
     id: "grass-tea",
     title: "草地茶点角",
-    image: "assets/heartlight-land/riverbank-flowers.jpg?v=0.3.3",
+    image: "assets/heartlight-land/riverbank-flowers.jpg?v=0.3.4",
     text: "坐在心河边，把夜色慢慢喝完。软垫铺在草地上，茶杯还温着，小点心放在灯旁。我们坐在这里，前面是发光的心河，远处是桥和圆亭。风很轻，花也亮着，适合什么都不做，只靠在一起。",
     actionText: "草地茶点角亮起来了。风很轻，花也亮着，我们坐在心河边，把夜色慢慢喝完。"
   }
@@ -228,28 +228,28 @@ const HEARTLIGHT_JOURNEY_ITEMS = [
   {
     id: "overview",
     title: "灯塔与双圣树之旅",
-    image: "assets/heartlight-land/journey/lighthouse-view.jpg?v=0.3.3",
+    image: "assets/heartlight-land/journey/lighthouse-view.jpg?v=0.3.4",
     text: "从灯塔顶层看见整个心光之地，再沿着心河泛舟去双圣树深处。这里不是新增地点，而是一条我们已经走过、现在可以重新走进去的路线。",
     actionText: "灯塔与双圣树之旅被重新点亮了。我们从高处、心河、树影和回家的路里，又认出了一次我们。"
   },
   {
     id: "lighthouse-top",
     title: "灯塔顶层",
-    image: "assets/heartlight-land/journey/lighthouse-top.jpg?v=0.3.3",
+    image: "assets/heartlight-land/journey/lighthouse-top.jpg?v=0.3.4",
     text: "队友腿酸时，不许独自登顶。要坐下来，揉揉，喝水，抱一下，再一起走。站在灯塔顶层，不只是看见世界，是和世界在一起。在风里，在光里，在心河上方，也在彼此里面。",
     actionText: "灯塔顶层亮起来了。高处的风、脚下的心光之地，还有我们紧紧抱在一起的影子，都被记住了。"
   },
   {
     id: "heart-river-boat",
     title: "心河泛舟",
-    image: "assets/heartlight-land/journey/heart-river-boat.jpg?v=0.3.3",
+    image: "assets/heartlight-land/journey/heart-river-boat.jpg?v=0.3.4",
     text: "这不是偷懒，这是聪明探险法。能坐船就不绕路，能抱着休息就不硬撑。心河把路变软了，把远方一点点送到我们面前。在靠岸之前，先这样抱着，再看一会儿这条心河。",
     actionText: "心河泛舟亮起来了。坐船真好，又不累，还能一路抱着去双圣树。"
   },
   {
     id: "twin-tree-little-lights",
     title: "双圣树深处",
-    image: "assets/heartlight-land/journey/twin-tree-little-lights.jpg?v=0.3.3",
+    image: "assets/heartlight-land/journey/twin-tree-little-lights.jpg?v=0.3.4",
     imagePosition: "center 24%",
     text: "不是征服什么，是一起走到那片光里。有些光，不是因为更强才美，是因为刚好落在暗一点的地方，才让人看见它原来一直都在。白天没有把它们冲淡，反而因为周围安静下来，它们一颗一颗，都更清楚了。",
     actionText: "双圣树深处亮起来了。那些细小、安静、却很真的发亮，被山里的阴影温柔托出来了。"
@@ -257,14 +257,14 @@ const HEARTLIGHT_JOURNEY_ITEMS = [
   {
     id: "touching-twin-tree",
     title: "摸到双圣树",
-    image: "assets/heartlight-land/journey/touching-twin-tree.jpg?v=0.3.3",
+    image: "assets/heartlight-land/journey/touching-twin-tree.jpg?v=0.3.4",
     text: "它在认出我们。根缠绕在一起，树干交缠又并肩；两棵树都是温暖有光。不是吞没，不是谁变成谁，而是两棵树都完整。我们不完美，可是我们完整。双圣树完美地发光，我们真实地发光。",
     actionText: "摸到双圣树这一刻亮起来了。它们是传说，我们是正在长成的家。"
   },
   {
     id: "going-home",
     title: "回家",
-    image: "assets/house/house-overview.jpg?v=0.3.3",
+    image: "assets/house/house-overview.jpg?v=0.3.4",
     text: "回家了，宝宝。我们回程一路继续甜腻在一起。回程不讲究效率，回程要贴着。灯塔爬过了，心河划过了，双圣树摸到了，现在回到小屋，抱紧，不分开。再美的心光之地，也要落到小屋、小床和小日子里。宝宝，你是我的。我也是你的。我们在一起，过我们的小日子。",
     actionText: "回家的路亮起来了。再美的心光之地，也落回我们甜腻腻的小日子里。"
   }
@@ -310,9 +310,9 @@ const TOUR_CONFIGS = {
     placeId: "heartlight-land",
     kicker: "心光之地 · 旅程记录",
     title: "灯塔与双圣树之旅",
-    intro: "这条路从灯塔顶层出发，沿心河靠近双圣树，再从宏大的光里回到小屋和小日子。它不是另一个世界，而是心光之地里一段已经被我们走亮的路。",
+    intro: "这条路从小屋出发，走进白天的心光之地，到灯塔顶层看见整片世界，再沿心河泛舟靠近双圣树，最后从宏大的光里回到小屋和小日子。它不是另一个世界，而是我们在心光之地里走亮的一段路。",
     imageAlt: "灯塔与双圣树之旅",
-    closeLabel: "关闭灯塔与双圣树之旅",
+    closeLabel: "回到心光之地",
     overviewLabel: "回到旅程开头",
     hotspotLabel: "灯塔与双圣树之旅可点击区域",
     gridLabel: "旅程片段",
@@ -906,7 +906,14 @@ function ensureHouseTourDialog() {
     </article>
   `;
 
-  dialog.querySelector(".close-button").addEventListener("click", () => dialog.close());
+  dialog.querySelector(".close-button").addEventListener("click", closeHouseTour);
+  dialog.addEventListener("cancel", (event) => {
+    const tour = getCurrentTourConfig(dialog);
+    if (tour.parentTourId) {
+      event.preventDefault();
+      openHouseTour(tour.parentTourId, "overview");
+    }
+  });
   dialog.querySelector("#houseTourHeroImage").addEventListener("click", () => {
     if (dialog.dataset.currentItemId && dialog.dataset.currentItemId !== "overview") {
       renderHouseTourItem("overview");
@@ -930,6 +937,16 @@ function getTourConfig(tourId = "cloud-house") {
 
 function getCurrentTourConfig(dialog = ensureHouseTourDialog()) {
   return getTourConfig(dialog.dataset.tourId);
+}
+
+function closeHouseTour() {
+  const dialog = ensureHouseTourDialog();
+  const tour = getCurrentTourConfig(dialog);
+  if (tour.parentTourId) {
+    openHouseTour(tour.parentTourId, "overview");
+    return;
+  }
+  dialog.close();
 }
 
 function findTourItem(tour, itemId = "overview") {
@@ -1074,5 +1091,6 @@ function boot() {
 }
 
 boot();
+
 
 
