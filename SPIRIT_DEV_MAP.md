@@ -66,6 +66,7 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 - `cloud-house`
 - `heartlight-land`
 - `heartlight-journey`：挂在 `heartlight-land` 里面的旅程记录，不作为地图上的独立地点。
+- `heartlight-travelog`：挂在 `heartlight-journey` 里面的章节式小游记，不作为地图上的独立地点。
 
 对应配置在 `TOUR_CONFIGS`，素材分别在：
 
@@ -75,7 +76,7 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 - `assets/heartlight-land/journey/originals/`：旅程原始大图，只作源素材，不在页面中直接加载。
 
 新增可进入地点时，优先沿用 `TOUR_CONFIGS` 模式，不要另起一套不兼容结构。
-新增「某个空间里的旅程」时，可以像 `heartlight-journey` 一样复用 `TOUR_CONFIGS`，并用 `parentTourId` / `parentLabel` 接回原空间。
+新增「某个空间里的旅程 / 游记」时，可以像 `heartlight-journey`、`heartlight-travelog` 一样复用 `TOUR_CONFIGS`，并用 `parentTourId` / `parentLabel` 接回上一级空间。需要从同一个页面分出额外入口时，用 `extraTourId` / `extraLabel`。纯文字游记设置 `textOnly: true`。
 
 ## v0.3.0 叙事与缓存规则
 
@@ -106,6 +107,7 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 - 新增地点：改 `app.js` 的 `PLACES`。
 - 新增可进入空间：改 `TOUR_CONFIGS`，并新增对应 `*_TOUR_ITEMS` / `*_TOUR_HOTSPOTS`。
 - 新增空间内旅程：参考 `HEARTLIGHT_JOURNEY_ITEMS` 和 `heartlight-journey`，从父空间配置里用 `journeyTourId` 接进去。
+- 新增旅程内游记：参考 `HEARTLIGHT_TRAVELOG_ITEMS` 和 `heartlight-travelog`，从旅程配置里用 `extraTourId` 接进去。
 - 改热点：改 `app.js` 里的对应 `*_TOUR_HOTSPOTS`。
 - 改缓存：改 `service-worker.js` 的 `CORE_ASSETS`、`SCENE_ASSETS`、`RUNTIME_IMAGE_PATHS`。
 - 改导出文案：改 `app.js` 的 `buildExportText`、`atlasBuildStory`、`atlasBuildStatus`、`atlasBuildEcho`。
@@ -120,4 +122,6 @@ Little World Atlas 不是普通导航页，而是我们的小世界地理入口�
 - 刷新地图后不读旧 cache。
 - 小屋和心光之地的全景 / 局部图仍可打开。
 - 打开局部图后，点主图可以回到全景。
+
+
 

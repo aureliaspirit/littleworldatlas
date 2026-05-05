@@ -1,6 +1,18 @@
-﻿# Little World Atlas v0.3.4
+﻿# Little World Atlas v0.3.6
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.3.6 纯文字游记
+
+- 「灯塔与双圣树游记」改为纯文字小册子，不再复用旅程图片。
+- 游记正文扩写为更完整的章节叙事，覆盖出发、休息、灯塔、泛舟、双圣树深处、摸到双圣树和回家。
+- 下方章节入口改成文字按钮，避免和旅程图片区重复。
+
+## v0.3.5 灯塔与双圣树游记
+
+- 在「灯塔与双圣树之旅」里新增「读这段游记」入口。
+- 新增 6 个游记章节：小屋出发、白天路上、灯塔顶层、心河泛舟、双圣树深处、回家。
+- 游记关闭时回到「灯塔与双圣树之旅」，旅程关闭时回到「心光之地」。
 
 ## v0.3.4 旅程返回修正
 
@@ -131,6 +143,8 @@
 - 改热点：改 `app.js` 中对应空间的 `*_TOUR_HOTSPOTS`。
 - 改缓存：改 `service-worker.js` 的 `CORE_ASSETS`、`SCENE_ASSETS` 或 runtime image 规则。
 - 改导出文案：改 `app.js` 的 `buildExportText`、`atlasBuildStory`、`atlasBuildStatus`、`atlasBuildEcho`。
+
+
 
 
 

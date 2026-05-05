@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: dark;
   --bg: #10142a;
   --bg-deep: #070a1a;
@@ -893,6 +893,10 @@ dialog::backdrop {
   overflow: hidden;
 }
 
+.house-tour-image-wrap[hidden] {
+  display: none !important;
+}
+
 .journey-tour .house-tour-image-wrap {
   display: flex;
   justify-content: center;
@@ -964,6 +968,28 @@ dialog::backdrop {
   font-size: 1.08rem;
 }
 
+.travelog-tour .house-tour-hero {
+  background: rgba(255,255,255,0.055);
+}
+
+.house-tour-hero figcaption.travelog-text {
+  gap: 14px;
+  padding: 20px 22px 22px;
+}
+
+.house-tour-hero figcaption.travelog-text strong {
+  font-size: 1.24rem;
+}
+
+.house-tour-hero figcaption.travelog-text .tour-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.house-tour-hero figcaption.travelog-text p {
+  margin: 0;
+}
+
 .house-tour-actions {
   align-items: center;
 }
@@ -1010,6 +1036,11 @@ dialog::backdrop {
   font-size: 0.92rem;
 }
 
+.house-tour-tile.text-only {
+  min-height: 58px;
+  align-content: center;
+}
+
 @media (max-width: 840px) {
   .house-tour-dialog {
     max-width: calc(100vw - 14px);
@@ -1037,3 +1068,4 @@ dialog::backdrop {
     border-radius: 18px;
   }
 }
+
