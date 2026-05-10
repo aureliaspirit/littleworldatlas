@@ -1,0 +1,66 @@
+﻿.house-tour-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.house-tour-content {
+  min-width: 0;
+}
+
+.house-tour-arrow {
+  display: none;
+  width: 44px;
+  min-width: 44px;
+  height: 72px;
+  border: 1px solid rgba(255, 245, 203, 0.35);
+  border-radius: 999px;
+  background: rgba(22, 26, 53, 0.62);
+  color: #fff4cb;
+  font-size: 2.5rem;
+  line-height: 1;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.house-tour-arrow:hover:not(:disabled) {
+  background: rgba(255, 244, 199, 0.18);
+  border-color: rgba(255, 245, 203, 0.58);
+}
+
+.house-tour-arrow:disabled {
+  cursor: default;
+  opacity: 0.28;
+}
+
+.journey-tour .house-tour-stage {
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+}
+
+.journey-tour .house-tour-arrow {
+  display: grid;
+}
+
+.travelog-tour .house-tour-stage {
+  align-items: stretch;
+}
+
+.travelog-tour .house-tour-arrow {
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .journey-tour .house-tour-stage {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    gap: 8px;
+  }
+
+  .house-tour-arrow {
+    width: 40px;
+    min-width: 40px;
+    height: 60px;
+    font-size: 2.1rem;
+  }
+}
