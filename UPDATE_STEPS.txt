@@ -1,7 +1,7 @@
-﻿Little World Atlas v0.3.6 更新步骤
+﻿Little World Atlas v0.3.7 更新步骤
 
-1. 下载并解压 littleworldatlas_v036_text_travelog_upload.zip
-2. 打开解压后的文件夹
+1. 打开本地 littleworldatlas 文件夹
+2. 准备上传根目录文件和 assets 文件夹
 3. 打开 GitHub 仓库 littleworldatlas
 4. 点 Add file → Upload files
 5. 把文件夹里面的所有内容拖进去，覆盖旧文件
@@ -17,7 +17,7 @@
 6. 点 Commit changes
 7. 等 1-10 分钟
 8. 打开 https://aureliaspirit.github.io/littleworldatlas/
-9. 点「刷新地图」或关闭 PWA / Safari 后重新打开，让 service worker 换到 v0.3.6
+9. 点「刷新地图」或关闭 PWA / Safari 后重新打开，让 service worker 换到 v0.3.7
 
 v0.2.3：修复地点卡小门按钮残留；普通地点不再显示上一次的入口按钮，小屋的「走进小屋」也不再被旧按钮挡住。
 
@@ -47,9 +47,9 @@ v0.3.5：在「灯塔与双圣树之旅」里新增「读这段游记」，用�
 
 v0.3.6：「灯塔与双圣树游记」改为纯文字小册子，扩写正文，并把下方章节入口改成文字按钮，避免和旅程图片区重复。
 
+v0.3.7：「灯塔与双圣树之旅」照片和「灯塔与双圣树游记」正文新增左右翻页箭头；旅程照片不再点图回旅程开头，心光之地外层局部图点图回全景继续保留。
+
 注意：不要上传整个文件夹本身。要上传里面的内容，让 app.js 等文件留在仓库根目录，assets/house 和 assets/heartlight-land 留在 assets 文件夹下面。
-
-
 
 
 
