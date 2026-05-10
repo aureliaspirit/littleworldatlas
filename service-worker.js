@@ -4,7 +4,9 @@ const CORE_ASSETS = [
   "./",
   "./index.html",
   "./style.css?v=0.3.7",
+  "./atlas-v037-overrides.css?v=0.3.7",
   "./app.js?v=0.3.7",
+  "./atlas-v037-overrides.js?v=0.3.7",
   "./manifest.json?v=0.3.7",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
@@ -98,8 +100,6 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
   }
 });
-
-
 
 
 
