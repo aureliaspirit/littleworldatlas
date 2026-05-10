@@ -1,6 +1,12 @@
-﻿# Little World Atlas v0.3.6
+﻿# Little World Atlas v0.3.7
 
 把我们走过的地方，一盏一盏点亮。
+
+## v0.3.7 旅程翻页优化
+
+- 「灯塔与双圣树之旅」照片左右两侧新增上一张 / 下一张箭头，不用再到底部逐个点。
+- 「灯塔与双圣树游记」正文左右两侧新增上一篇 / 下一篇箭头，读游记时可以直接翻页。
+- 旅程照片不再支持点图回到旅程开头；「心光之地」外层局部照片点一下回全景的行为继续保留。
 
 ## v0.3.6 纯文字游记
 
@@ -143,8 +149,6 @@
 - 改热点：改 `app.js` 中对应空间的 `*_TOUR_HOTSPOTS`。
 - 改缓存：改 `service-worker.js` 的 `CORE_ASSETS`、`SCENE_ASSETS` 或 runtime image 规则。
 - 改导出文案：改 `app.js` 的 `buildExportText`、`atlasBuildStory`、`atlasBuildStatus`、`atlasBuildEcho`。
-
-
 
 
 
