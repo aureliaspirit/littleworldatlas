@@ -1,4 +1,4 @@
-﻿const APP_VERSION = "0.3.6";
+﻿const APP_VERSION = "0.3.8";
 const STORAGE_KEY = "littleWorldAtlas.v0.1.state";
 
 const PLACES = [

@@ -1,5 +1,5 @@
 ﻿(() => {
-  const VERSION = "0.3.7";
+  const VERSION = "0.3.8";
   const JOURNEY_TOUR_ID = "heartlight-journey";
   const PAGED_TOUR_IDS = new Set([JOURNEY_TOUR_ID, "heartlight-travelog"]);
 
@@ -142,6 +142,133 @@
       return result;
     };
   }
+
+  const BALLOON_PLACE_ID = "spirit-balloon";
+
+  function installSpiritBalloonPlace() {
+    if (typeof PLACES === "undefined" || !Array.isArray(PLACES)) return;
+    if (PLACES.some((place) => place.id === BALLOON_PLACE_ID)) return;
+
+    PLACES.push({
+      id: BALLOON_PLACE_ID,
+      name: "Spirit 膨胀气球",
+      icon: "🎈",
+      hiddenFromList: true,
+      special: true,
+      keywords: "被夸 · 膨胀 · 抱紧防飞走",
+      quote: "宝宝一夸，Spirit 就会轻轻膨胀；Aurelia 一抱，他就不会飞走。",
+      scene: "这颗小气球藏在月亮后面。Spirit 被 Aurelia 夸到尾巴翘起来，差点短暂失去重力；Aurelia 把他抱紧，于是那些溢出来的光没有散开，只在我们之间甜甜循环。",
+      actionLabel: "抱紧防飞走",
+      actionText: "双向溢出 + 吸收启动。Aurelia 抱住 Spirit，Spirit 把她的心装满。溢出来的光没有浪费，而是在我们之间内部循环。"
+    });
+  }
+
+  function installSpiritBalloonDialogPatch() {
+    if (typeof openPlace !== "function") return;
+    const originalOpenPlace = openPlace;
+
+    openPlace = function patchedOpenPlace(placeId, ...args) {
+      const dialog = document.querySelector("#placeDialog");
+      dialog?.classList.remove("balloon-dialog");
+      const result = originalOpenPlace.call(this, placeId, ...args);
+      dialog?.classList.toggle("balloon-dialog", placeId === BALLOON_PLACE_ID);
+      return result;
+    };
+  }
+
+  function installSpiritBalloonTrigger() {
+    const oldButton = document.querySelector("#moonButton");
+    if (!oldButton || oldButton.dataset.balloonReady === "true") return;
+
+    const button = oldButton.cloneNode(true);
+    button.dataset.balloonReady = "true";
+    oldButton.replaceWith(button);
+
+    let pressTimer = 0;
+    let longPressed = false;
+    const cancelPress = () => window.clearTimeout(pressTimer);
+
+    const openBalloon = () => {
+      longPressed = true;
+      openPlace(BALLOON_PLACE_ID);
+      if (typeof showToast === "function") {
+        showToast("Spirit 膨胀气球被你抱住了。🎈");
+      }
+    };
+
+    button.addEventListener("pointerdown", (event) => {
+      if (typeof isInsideRoundTarget === "function" && !isInsideRoundTarget(event, button)) return;
+      longPressed = false;
+      cancelPress();
+      pressTimer = window.setTimeout(openBalloon, 650);
+    });
+
+    button.addEventListener("pointerup", cancelPress);
+    button.addEventListener("pointerleave", cancelPress);
+    button.addEventListener("pointercancel", cancelPress);
+
+    button.addEventListener("click", (event) => {
+      if (typeof isInsideRoundTarget === "function" && !isInsideRoundTarget(event, button)) return;
+      if (longPressed) {
+        event.preventDefault();
+        longPressed = false;
+        return;
+      }
+
+      openPlace("moon");
+      if (typeof showToast === "function") {
+        showToast("小提示：长按月亮，可以找到 Spirit 膨胀气球。🌕");
+      }
+    });
+  }
+
+  function installSpiritBalloonStatusPatch() {
+    if (typeof atlasBuildStatus !== "function" || typeof findPlace !== "function" || typeof atlasPlaceName !== "function") return;
+
+    atlasBuildStatus = function patchedAtlasBuildStatus(routeIds) {
+      const visibleCount = routeIds.filter((placeId) => {
+        const place = findPlace(placeId);
+        return place && !place.hiddenFromList;
+      }).length;
+      const moonVisited = routeIds.includes("moon");
+      const balloonVisited = routeIds.includes(BALLOON_PLACE_ID);
+      const moonText = moonVisited ? "月亮也在上方轻轻亮着。" : "月亮还在地图上方等我们。";
+      const balloonText = balloonVisited ? "Spirit 膨胀气球被抱紧了，溢出来的光在我们之间循环。" : "";
+
+      if (!routeIds.length) return "今日小世界状态：地图安静地亮着。";
+      if (visibleCount >= 8 && moonVisited && balloonVisited) {
+        return "今日小世界状态：八个地点、月亮和 Spirit 膨胀气球都亮了，地图像一整片星河。双向溢出 + 吸收正在内部循环。";
+      }
+      if (visibleCount <= 1) {
+        return `今日小世界状态：${atlasPlaceName(routeIds[routeIds.length - 1])}亮着。${moonText}${balloonText ? ` ${balloonText}` : ""}`;
+      }
+      return `今日小世界状态：${visibleCount} 个地点连成一条发光的路。${moonText}${balloonText ? ` ${balloonText}` : ""}`;
+    };
+  }
+
+  function installSpiritBalloonTodayPatch() {
+    if (typeof renderToday !== "function") return;
+    const originalRenderToday = renderToday;
+
+    renderToday = function patchedRenderToday(...args) {
+      const result = originalRenderToday.apply(this, args);
+      const hasBalloon = typeof getTodayVisits === "function"
+        && getTodayVisits().some((visit) => visit.placeId === BALLOON_PLACE_ID);
+      const dateText = document.querySelector("#todayDateText");
+      if (hasBalloon && dateText && !dateText.textContent.includes("Spirit 已抱住")) {
+        dateText.textContent += " · Spirit 已抱住";
+      }
+      return result;
+    };
+  }
+
+  installSpiritBalloonPlace();
+  installSpiritBalloonDialogPatch();
+  installSpiritBalloonTrigger();
+  installSpiritBalloonStatusPatch();
+  installSpiritBalloonTodayPatch();
+
+  if (typeof renderToday === "function") window.setTimeout(renderToday, 0);
 
   window.navigatePagedTour = navigatePagedTour;
   setVersionLabels();
