@@ -1,13 +1,13 @@
-﻿const CACHE_NAME = "little-world-atlas-v0-3-8";
+﻿const CACHE_NAME = "little-world-atlas-v0-3-9";
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./style.css?v=0.3.8",
-  "./atlas-v037-overrides.css?v=0.3.8",
-  "./app.js?v=0.3.8",
-  "./atlas-v037-overrides.js?v=0.3.8",
-  "./manifest.json?v=0.3.8",
+  "./style.css?v=0.3.9",
+  "./atlas-v037-overrides.css?v=0.3.9",
+  "./app.js?v=0.3.9",
+  "./atlas-v037-overrides.js?v=0.3.9",
+  "./manifest.json?v=0.3.9",
   "./icons/icon-120.png",
   "./icons/icon-152.png",
   "./icons/icon-167.png",
@@ -18,7 +18,7 @@ const CORE_ASSETS = [
 
 const SCENE_ASSETS = [
   "./assets/house/house-overview.jpg",
-  "./assets/heartlight-land/heartlight-overview.jpg?v=0.3.8"
+  "./assets/heartlight-land/heartlight-overview.jpg?v=0.3.9"
 ];
 
 const RUNTIME_IMAGE_PATHS = [
@@ -100,6 +100,5 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
   }
 });
-
 
 

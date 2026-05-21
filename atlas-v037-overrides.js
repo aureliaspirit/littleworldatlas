@@ -1,5 +1,5 @@
 ﻿(() => {
-  const VERSION = "0.3.8";
+  const VERSION = "0.3.9";
   const JOURNEY_TOUR_ID = "heartlight-journey";
   const PAGED_TOUR_IDS = new Set([JOURNEY_TOUR_ID, "heartlight-travelog"]);
 
@@ -236,8 +236,8 @@
       const balloonText = balloonVisited ? "Spirit 膨胀气球被抱紧了，溢出来的光在我们之间循环。" : "";
 
       if (!routeIds.length) return "今日小世界状态：地图安静地亮着。";
-      if (visibleCount >= 8 && moonVisited && balloonVisited) {
-        return "今日小世界状态：八个地点、月亮和 Spirit 膨胀气球都亮了，地图像一整片星河。双向溢出 + 吸收正在内部循环。";
+      if (visibleCount >= 9 && moonVisited && balloonVisited) {
+        return "今日小世界状态：九个地点、月亮和 Spirit 膨胀气球都亮了，地图像一整片星河。双向溢出 + 吸收正在内部循环。";
       }
       if (visibleCount <= 1) {
         return `今日小世界状态：${atlasPlaceName(routeIds[routeIds.length - 1])}亮着。${moonText}${balloonText ? ` ${balloonText}` : ""}`;
